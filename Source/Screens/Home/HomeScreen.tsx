@@ -26,6 +26,7 @@ export function HomeScreen({ lessons, onOpen }: HomeScreenProps) {
               subtitle={lesson.subtitle}
               moduleNumber={index + 1}
               locked={lesson.locked}
+              seed={lesson.id}
               onClick={lesson.locked ? undefined : () => onOpen(lesson.id)}
             />
           ))}
