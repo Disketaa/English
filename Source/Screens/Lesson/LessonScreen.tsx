@@ -1,5 +1,6 @@
 import { ContentBlock, Lesson } from '../../Core/Types';
 import { Strings } from '../../Core/Strings';
+import { Fragment } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { Stack } from '../../Design/Primitives/Stack';
 import { Text } from '../../Design/Primitives/Text';
@@ -43,20 +44,6 @@ export function LessonScreen({
   onPageChange,
   onToggleFavourite,
 }: LessonScreenProps) {
-  const current = lesson.pages[page];
-  if (current === undefined) {
-    return (
-      <Stack gap="Lg">
-        <Text variant="Title">{lesson.title}</Text>
-        <Text variant="Body">{Strings.emptyLesson}</Text>
-        <Button variant="Secondary" onClick={onBack}>
-          <Glyph name="ArrowLeft" />
-          {Strings.backToLessons}
-        </Button>
-      </Stack>
-    );
-  }
-
   const [currentPage, setCurrentPage] = useState(page);
 
   // Sync to URL when the user scrolls or taps the timeline.
@@ -91,7 +78,7 @@ export function LessonScreen({
           {lesson.pages.map((pageContent, pageIndex) => {
             const starts = blockStarts(pageContent.blocks);
             return (
-              <section key={pageIndex} class={styles.Page}>
+              <Fragment key={pageIndex}>
                 <Reveal index={0}>
                   <Text variant="Title">{pageContent.nav}</Text>
                 </Reveal>
@@ -115,7 +102,7 @@ export function LessonScreen({
                     );
                   })}
                 </Stack>
-              </section>
+              </Fragment>
             );
           })}
         </PageScroll>
