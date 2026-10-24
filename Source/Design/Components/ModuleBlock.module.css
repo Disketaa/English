@@ -192,7 +192,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--Color-Dark);
+  background: var(--Color-Gold);
   margin-left: var(--Space-Xs);
   vertical-align: middle;
   animation: pulse 2s ease-in-out infinite;
