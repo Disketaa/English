@@ -1,7 +1,7 @@
-import { ComponentChildren } from "preact";
-import styles from "./Button.module.css";
+import { ComponentChildren } from 'preact';
+import styles from './Button.module.css';
 
-export type ButtonVariant = "Primary";
+export type ButtonVariant = 'Primary';
 
 export interface ButtonProps {
   variant?: ButtonVariant;
@@ -9,7 +9,7 @@ export interface ButtonProps {
   children: ComponentChildren;
 }
 
-export function Button({ variant = "Primary", onClick, children }: ButtonProps) {
+export function Button({ variant = 'Primary', onClick, children }: ButtonProps) {
   return (
     <button
       class={`${styles.Root} ${styles[`Variant${variant}`]}`}

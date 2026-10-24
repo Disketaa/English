@@ -16,15 +16,16 @@ const ban = (...modules) => ({
   group: modules.flatMap((m) => [`@/${m}`, `@/${m}/**`]),
   message: `This layer cannot import: ${modules.join(", ")}.`,
 });
-const layer = (folder, banned) => ({
-  files: [`Source/${folder}/**/*.{ts,tsx}`],
-  rules: {
-    "no-restricted-imports": [
-      "error",
-      { patterns: [deepImport, ban(...banned)] },
-    ],
-  },
-});
+const layer = (folder, banned) => {
+  const patterns = [deepImport];
+  if (banned.length > 0) patterns.push(ban(...banned));
+  return {
+    files: [`Source/${folder}/**/*.{ts,tsx}`],
+    rules: {
+      "no-restricted-imports": ["error", { patterns }],
+    },
+  };
+};
 
 export default tseslint.config(
   { ignores: ["dist", "node_modules", ".kilo", "Source/Design/Tokens.css"] },

@@ -2,6 +2,6 @@
   width: 32px;
   height: 32px;
   object-fit: contain;
-  border-radius: var(--Radius-Sm);
+  border-radius: var(--Radius-Md);
   flex-shrink: 0;
 }

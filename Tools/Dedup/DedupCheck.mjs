@@ -1,8 +1,7 @@
-/** Dedup check: scans Source/ for duplicate function declarations.
- * Reports functions with identical names and similar signatures.
- * No test files required. */
-import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join, extname } from "node:path";
+/** Dedup check: scans Source/ for duplicate function declarations. Reports functions with
+ * identical names and similar signatures. No test files required. */
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const ROOT = "Source";
 
@@ -23,7 +22,7 @@ function extractFunctions(source) {
   // Simple regex-based extraction for duplicate detection
   const funcRegex = /function\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)/g;
   const arrowRegex = /(?:const|let|var)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=[^=]*=>/g;
-  const methodRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*\{/g;
+  const methodRegex = /(?<!function\s)([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*\{/g;
 
   let match;
   while ((match = funcRegex.exec(source)) !== null) {

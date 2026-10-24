@@ -1,10 +1,10 @@
 /* Design tokens — mobile-first, iPhone-style unified layout */
 :root {
   /* Primitive layer — main palette */
-  --Color-Cream: #FCF0DA; /* rgb(252, 240, 218) */
-  --Color-Sage: #AEAC78; /* rgb(174, 172, 120) */
-  --Color-Gold: #F2C46A; /* rgb(242, 196, 106) */
-  --Color-Dark: #4C4541; /* rgb(76, 69, 65) */
+  --Color-Cream: #fcf0da;
+  --Color-Sage: #aeac78;
+  --Color-Gold: #f2c46a;
+  --Color-Dark: #4c4541;
   --Space-4: 0.25rem;
   --Space-8: 0.5rem;
   --Space-12: 0.75rem;
@@ -12,7 +12,7 @@
   --Space-20: 1.25rem;
   --Space-24: 1.5rem;
   --Space-32: 2rem;
-  --Space-44: 2.75rem; /* min touch target */
+  --Space-44: 2.75rem;
   --Space-48: 3rem;
 
   /* Semantic layer — mobile unified */
@@ -30,13 +30,14 @@
   --Space-Lg: var(--Space-24);
   --Space-Xl: var(--Space-32);
 
-  /* Apple font: -apple-system / BlinkMacSystemFont for iOS/macOS. No license needed — system font. Safe for distribution. */
-  --Font-Body: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --Font-Title: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Apple font: -apple-system / BlinkMacSystemFont for iOS/macOS. No license needed — system
+   * font. Safe for distribution. */
+  --Font-Body: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --Font-Title: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --Radius-Sm: 0.5rem;
-  --Radius-Md: 0.75rem;
-  --Radius-Lg: 1rem;
+  --Radius-Sm: 0.75rem;
+  --Radius-Md: 1rem;
+  --Radius-Lg: 1.25rem;
 
   /* Mobile unified constraints */
   --App-Max-Width: 430px; /* iPhone 14 Pro Max width */
@@ -64,7 +65,11 @@ body {
 }
 
 /* Touch targets */
-button, a, input, textarea, select {
+button,
+a,
+input,
+textarea,
+select {
   min-height: var(--App-Min-Touch);
   font-size: var(--App-Font-Min-Input);
 }

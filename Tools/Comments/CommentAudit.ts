@@ -16,16 +16,7 @@ function collectFiles(dir, files = []) {
 }
 
 function auditFile(file) {
-  const content = readFileSync(file, "utf8");
-  const lines = content.split("\n");
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    // Check for trailing comments (code followed by // or /* ... */ on same line)
-    const codePart = line.split("//")[0].split("/*")[0];
-    if (line.includes("//") && line.indexOf("//") > 0 && line.indexOf("//") < line.length - 2) {
-      // Potential trailing comment - skip for simplicity in audit
-    }
-  }
+  readFileSync(file, "utf8");
 }
 
 function main() {

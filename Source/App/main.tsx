@@ -1,4 +1,8 @@
-import { render } from "preact";
-import { App } from "./App";
+import { render } from 'preact';
+import { App } from './App';
+import '../Design/Tokens.css';
 
-render(<App />, document.getElementById("app")!);
+const app = document.getElementById('app');
+if (app) {
+  render(<App />, app);
+}
