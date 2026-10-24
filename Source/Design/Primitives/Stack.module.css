@@ -1,0 +1,8 @@
+.Root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Md);
+  padding: var(--Space-Md);
+  max-width: var(--App-Max-Width);
+  margin: 0 auto;
+}

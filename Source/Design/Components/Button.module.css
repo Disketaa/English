@@ -1,0 +1,19 @@
+.Root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--App-Min-Touch);
+  padding: var(--Space-Sm) var(--Space-Md);
+  border-radius: var(--Radius-Md);
+  border: none;
+  font-family: var(--Font-Body);
+  font-size: var(--App-Font-Min-Input);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.VariantPrimary {
+  background: var(--Color-Action-Primary-Background);
+  color: var(--Color-Action-Primary-Text);
+}

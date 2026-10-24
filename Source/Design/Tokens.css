@@ -1,0 +1,76 @@
+/* Design tokens — mobile-first, iPhone-style unified layout */
+:root {
+  /* Primitive layer */
+  --Color-Blue-500: #3b82f6;
+  --Color-Green-500: #22c55e;
+  --Color-Gray-50: #f9fafb;
+  --Color-Gray-900: #111827;
+  --Space-4: 0.25rem;
+  --Space-8: 0.5rem;
+  --Space-12: 0.75rem;
+  --Space-16: 1rem;
+  --Space-20: 1.25rem;
+  --Space-24: 1.5rem;
+  --Space-32: 2rem;
+  --Space-44: 2.75rem; /* min touch target */
+  --Space-48: 3rem;
+
+  /* Semantic layer — mobile unified */
+  --Color-Surface-Default: var(--Color-Gray-50);
+  --Color-Surface-Inverse: var(--Color-Gray-900);
+  --Color-Action-Primary-Background: var(--Color-Blue-500);
+  --Color-Action-Primary-Text: #ffffff;
+  --Color-Text-Primary: var(--Color-Gray-900);
+  --Color-Text-Secondary: #6b7280;
+  --Color-Border-Default: #e5e7eb;
+
+  --Space-Xs: var(--Space-8);
+  --Space-Sm: var(--Space-12);
+  --Space-Md: var(--Space-16);
+  --Space-Lg: var(--Space-24);
+  --Space-Xl: var(--Space-32);
+
+  --Font-Body: system-ui, -apple-system, sans-serif;
+  --Font-Title: system-ui, -apple-system, sans-serif;
+
+  --Radius-Sm: 0.5rem;
+  --Radius-Md: 0.75rem;
+  --Radius-Lg: 1rem;
+
+  /* Mobile unified constraints */
+  --App-Max-Width: 430px; /* iPhone 14 Pro Max width */
+  --App-Min-Touch: 44px;
+  --App-Font-Min-Input: 16px;
+}
+
+/* Global mobile-first layout */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--Font-Body);
+  background: var(--Color-Surface-Default);
+  color: var(--Color-Text-Primary);
+  /* Unified phone container */
+  max-width: var(--App-Max-Width);
+  margin: 0 auto;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* Touch targets */
+button, a, input, textarea, select {
+  min-height: var(--App-Min-Touch);
+  font-size: var(--App-Font-Min-Input);
+}
+
+/* Focus-visible for keyboard/accessibility */
+:focus-visible {
+  outline: 2px solid var(--Color-Action-Primary-Background);
+  outline-offset: 2px;
+  border-radius: var(--Radius-Sm);
+}
