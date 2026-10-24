@@ -5,6 +5,27 @@ import { join } from "node:path";
 
 const ROOT = "Source";
 
+/** Language keywords the method regex also matches (`if (x) {`, `switch (x) {`). */
+const KEYWORDS = new Set([
+  "if",
+  "else",
+  "for",
+  "while",
+  "do",
+  "switch",
+  "case",
+  "catch",
+  "try",
+  "finally",
+  "return",
+  "new",
+  "typeof",
+  "delete",
+  "await",
+  "function",
+]);
+
+
 function collectFiles(dir, files = []) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
@@ -23,7 +44,6 @@ function extractFunctions(source) {
   const funcRegex = /function\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)/g;
   const arrowRegex = /(?:const|let|var)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=[^=]*=>/g;
   const methodRegex = /(?<!function\s)([a-zA-Z_][a-zA-Z0-9_]*)\s*\([^)]*\)\s*\{/g;
-
   let match;
   while ((match = funcRegex.exec(source)) !== null) {
     funcs.push({ name: match[1], type: "function", line: source.slice(0, match.index).split("\n").length });
@@ -44,6 +64,7 @@ function main() {
     const content = readFileSync(file, "utf8");
     const funcs = extractFunctions(content);
     for (const f of funcs) {
+      if (KEYWORDS.has(f.name)) continue;
       allFuncs.push({ ...f, file: file.replace(/\\/g, "/") });
     }
   }
