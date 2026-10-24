@@ -9,5 +9,6 @@ export const Strings = {
   addFavouriteLabel: 'Добавить в избранное',
   removeFavouriteLabel: 'Убрать из избранного',
   paginationLabel: 'Навигация по уроку',
+  lessonTimelineLabel: 'Главы урока',
   emptyLesson: 'Урок скоро появится',
 } as const;

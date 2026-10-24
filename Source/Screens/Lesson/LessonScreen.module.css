@@ -1,4 +1,8 @@
 .Root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  overflow: hidden;
   padding-bottom: calc(var(--Space-48) + var(--Space-24));
 }
 
@@ -7,10 +11,22 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--Space-Sm);
+  flex-shrink: 0;
+}
+
+.Main {
+  display: flex;
+  gap: var(--Space-Sm);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding-top: var(--Space-Sm);
 }
 
 .Page {
   display: flex;
   flex-direction: column;
   gap: var(--Space-Md);
+  height: 100%;
+  overflow-y: auto;
 }

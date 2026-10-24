@@ -1,0 +1,56 @@
+.Root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Xs);
+  padding: var(--Space-Xs);
+  height: 100%;
+  overflow-y: auto;
+  width: max-content;
+}
+
+.Item {
+  display: flex;
+  align-items: center;
+  gap: var(--Space-Xs);
+  padding: var(--Space-Sm);
+  border-radius: var(--Radius-Sm);
+  border: none;
+  background: transparent;
+  color: var(--Color-Text-Secondary);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.Item:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ItemReached:not(:disabled) {
+  color: var(--Color-Text-Primary);
+  background: var(--Color-Glass-Background);
+}
+
+.ItemCurrent {
+  color: var(--Color-Action-Primary-Text);
+  background: var(--Color-Action-Primary-Background);
+  box-shadow:
+    inset 0 1px 0 var(--Color-Glass-Highlight),
+    0 var(--Space-4) var(--Space-12) var(--Color-Glass-Shadow);
+}
+
+.Number {
+  font-weight: 700;
+  font-size: var(--App-Font-Min-Input);
+  min-width: var(--Space-16);
+  text-align: center;
+}
+
+.Name {
+  font-size: var(--Space-12);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: var(--Space-44);
+}
