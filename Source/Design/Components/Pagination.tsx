@@ -1,6 +1,7 @@
 import { Strings } from '../../Core/Strings';
-import { Text } from '../Primitives/Text';
-import { Button } from './Button';
+import { Glyph } from './Glyph';
+import { IconButton } from './IconButton';
+import { Dock } from './Dock';
 import styles from './Pagination.module.css';
 
 export interface PaginationProps {
@@ -15,24 +16,28 @@ export function Pagination({ page, pageCount, onPrevious, onNext }: PaginationPr
   const isLast = page >= pageCount - 1;
 
   return (
-    <nav class={styles.Root} aria-label={Strings.paginationLabel}>
-      <Button variant="Secondary" disabled={page === 0} onClick={onPrevious}>
-        {Strings.previous}
-      </Button>
-      <div class={styles.Pages}>
-        <div class={styles.Dots} aria-hidden="true">
-          {Array.from({ length: pageCount }, (_, index) => (
-            <span
-              key={index}
-              class={`${styles.Dot} ${index === page ? styles.DotActive : ''}`}
-            />
-          ))}
-        </div>
-        <Text variant="Caption">
-          {page + 1} / {pageCount}
-        </Text>
+    <Dock label={Strings.paginationLabel}>
+      <IconButton label={Strings.previous} disabled={page === 0} onClick={onPrevious}>
+        <Glyph name="ArrowLeft" />
+      </IconButton>
+
+      <div class={styles.Dots} aria-hidden="true">
+        {Array.from({ length: pageCount }, (_, index) => (
+          <span key={index} class={`${styles.Dot} ${index === page ? styles.DotActive : ''}`} />
+        ))}
       </div>
-      <Button onClick={onNext}>{isLast ? Strings.finish : Strings.next}</Button>
-    </nav>
+
+      <span class={styles.Counter}>
+        {page + 1} / {pageCount}
+      </span>
+
+      <IconButton
+        variant="Primary"
+        label={isLast ? Strings.finish : Strings.next}
+        onClick={onNext}
+      >
+        <Glyph name={isLast ? 'Check' : 'ArrowRight'} />
+      </IconButton>
+    </Dock>
   );
 }

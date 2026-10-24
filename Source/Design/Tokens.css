@@ -5,6 +5,7 @@
   --Color-Sage: #aeac78;
   --Color-Gold: #f2c46a;
   --Color-Dark: #4c4541;
+  --Color-Green-Deep: #5f6b3f;
   --Space-4: 0.25rem;
   --Space-8: 0.5rem;
   --Space-12: 0.75rem;
@@ -23,6 +24,27 @@
   --Color-Text-Primary: var(--Color-Dark);
   --Color-Text-Secondary: var(--Color-Sage);
   --Color-Border-Default: var(--Color-Sage);
+
+  /* Glass layer: translucent surfaces that blur what scrolls behind them. */
+  --Color-Glass-Background: rgba(252, 240, 218, 0.34);
+  --Color-Glass-Border: rgba(76, 69, 65, 0.16);
+  --Color-Glass-Highlight: rgba(255, 255, 255, 0.6);
+  --Color-Glass-Sheen: rgba(255, 255, 255, 0.42);
+  --Color-Glass-Shadow: rgba(76, 69, 65, 0.22);
+  --Blur-Glass: 28px;
+
+  /* Title layer: the flowing green-black gradient shared by every Title. */
+  --Color-Title-Gradient-Start: var(--Color-Green-Deep);
+  --Color-Title-Gradient-End: var(--Color-Dark);
+  --Duration-Title-Flow: 9s;
+
+  /* Motion layer: one staggered fade-in drives every revealed element. */
+  --Duration-Reveal: 820ms;
+  --Duration-Reveal-Move: 1100ms;
+  --Delay-Reveal: 15ms;
+  --Reveal-Distance: 0.5rem;
+  --Reveal-Drift: 0.0625rem;
+  --Ease-Reveal: cubic-bezier(0.16, 1, 0.3, 1);
 
   --Space-Xs: var(--Space-8);
   --Space-Sm: var(--Space-12);
@@ -49,6 +71,7 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -61,7 +84,7 @@ body {
   max-width: var(--App-Max-Width);
   margin: 0 auto;
   min-height: 100dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Touch targets */

@@ -31,7 +31,6 @@ export const articlesLesson: Lesson = {
     {
       nav: 'Профессии',
       blocks: [
-        { kind: 'Subtitle', text: 'Профессии' },
         {
           kind: 'Text',
           text: 'Когда мы говорим, кем работает человек, обычно используем a/an.',

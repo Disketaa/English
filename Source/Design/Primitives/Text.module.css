@@ -11,6 +11,33 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  background-image: linear-gradient(
+    90deg,
+    var(--Color-Title-Gradient-Start),
+    var(--Color-Title-Gradient-End),
+    var(--Color-Title-Gradient-Start)
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: titleFlow var(--Duration-Title-Flow) linear infinite;
+}
+
+@keyframes titleFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VariantTitle {
+    animation: none;
+  }
 }
 
 .VariantSubtitle {

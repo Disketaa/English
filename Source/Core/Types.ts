@@ -6,7 +6,7 @@ export type ContentBlock =
 
 /** One paginated screen of a lesson. */
 export interface LessonPage {
-  /** Short label shown under the lesson title on this page. */
+  /** Title shown at the top of the page. */
   nav: string;
   blocks: ContentBlock[];
 }

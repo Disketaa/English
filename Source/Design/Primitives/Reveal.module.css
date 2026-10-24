@@ -1,0 +1,30 @@
+.Root {
+  animation:
+    revealFade var(--Duration-Reveal) linear both,
+    revealMove var(--Duration-Reveal-Move) var(--Ease-Reveal) both;
+  animation-delay: calc(var(--Reveal-Index, 0) * var(--Delay-Reveal));
+}
+
+@keyframes revealFade {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes revealMove {
+  from {
+    transform: translate3d(0, calc(0.25rem + var(--Reveal-Index, 0) * var(--Reveal-Drift)), 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Root {
+    animation: none;
+  }
+}
