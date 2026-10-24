@@ -1,5 +1,5 @@
-import { Stack } from "@/Design/Primitives/Stack.tsx";
-import { Button } from "@/Design/Components/Button.tsx";
+import { Stack } from "../Design/Primitives/Stack";
+import { Button } from "../Design/Components/Button";
 
 export function App() {
   return (
