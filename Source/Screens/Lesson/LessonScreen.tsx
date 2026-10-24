@@ -1,7 +1,7 @@
 import { ContentBlock, Lesson } from '../../Core/Types';
 import { Strings } from '../../Core/Strings';
 import { Fragment } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { Stack } from '../../Design/Primitives/Stack';
 import { Text } from '../../Design/Primitives/Text';
 import { Reveal } from '../../Design/Primitives/Reveal';
@@ -45,6 +45,7 @@ export function LessonScreen({
   onToggleFavourite,
 }: LessonScreenProps) {
   const [currentPage, setCurrentPage] = useState(page);
+  const mainRef = useRef<HTMLDivElement>(null);
 
   // Sync to URL when the user scrolls or taps the timeline.
   const handlePageChange = (newPage: number) => {
@@ -73,8 +74,12 @@ export function LessonScreen({
         </IconButton>
       </div>
 
-      <div class={styles.Main}>
-        <PageScroll currentPage={currentPage} onPageChange={handlePageChange}>
+      <div class={styles.Main} ref={mainRef}>
+        <PageScroll
+          scrollContainerRef={mainRef}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        >
           {lesson.pages.map((pageContent, pageIndex) => {
             const starts = blockStarts(pageContent.blocks);
             return (

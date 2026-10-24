@@ -3,13 +3,6 @@
   flex-direction: column;
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.Root::-webkit-scrollbar {
-  display: none;
 }
 
 .PagePanel {

@@ -19,6 +19,6 @@
   gap: var(--Space-Sm);
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow-y: auto;
   padding-top: var(--Space-Sm);
 }
