@@ -30,8 +30,9 @@
   --Space-Lg: var(--Space-24);
   --Space-Xl: var(--Space-32);
 
-  --Font-Body: system-ui, -apple-system, sans-serif;
-  --Font-Title: system-ui, -apple-system, sans-serif;
+  /* Apple font: -apple-system / BlinkMacSystemFont for iOS/macOS. No license needed — system font. Safe for distribution. */
+  --Font-Body: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --Font-Title: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --Radius-Sm: 0.5rem;
   --Radius-Md: 0.75rem;
