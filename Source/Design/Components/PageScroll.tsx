@@ -8,47 +8,64 @@ export interface PageScrollProps {
   children: ComponentChildren;
 }
 
+/** Pixels scrolled per wheel delta unit. */
+const wheelSensitivity = 0.6;
+
 export function PageScroll({ currentPage, onPageChange, children }: PageScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isProgrammatic = useRef(false);
 
+  const getContainer = (): HTMLDivElement | null => containerRef.current;
+
   const scrollToPage = useCallback((page: number) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const itemWidth = container.clientWidth;
+    const scrollEl = getContainer();
+    if (!scrollEl) return;
+    const itemWidth = scrollEl.clientWidth;
     if (itemWidth === 0) return;
     isProgrammatic.current = true;
-    container.scrollTo({ left: page * itemWidth, behavior: 'smooth' });
+    scrollEl.scrollTo({ left: page * itemWidth, behavior: 'smooth' });
     isProgrammatic.current = false;
   }, []);
 
   const handleScroll = useCallback(() => {
     if (isProgrammatic.current) return;
-    const container = containerRef.current;
-    if (!container) return;
-    const itemWidth = container.clientWidth;
+    const scrollEl = getContainer();
+    if (!scrollEl) return;
+    const itemWidth = scrollEl.clientWidth;
     if (itemWidth === 0) return;
-    const pageCount = container.children.length;
-    const page = Math.round(container.scrollLeft / itemWidth);
+    const pageCount = scrollEl.children.length;
+    const page = Math.round(scrollEl.scrollLeft / itemWidth);
     if (page >= 0 && page < pageCount) {
       onPageChange(page);
     }
   }, [onPageChange]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+  const handleWheel = useCallback((event: WheelEvent) => {
+    const wheelEl = getContainer();
+    if (!wheelEl) return;
+    // Vertical wheel → horizontal scroll; prevent page-level vertical scroll.
+    event.preventDefault();
+    wheelEl.scrollBy({ left: event.deltaY * wheelSensitivity, behavior: 'smooth' });
+  }, []);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const itemWidth = container.clientWidth;
+    const scrollEl = getContainer();
+    if (!scrollEl) return;
+    scrollEl.addEventListener('scroll', handleScroll, { passive: true });
+    scrollEl.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      scrollEl.removeEventListener('scroll', handleScroll);
+      scrollEl.removeEventListener('wheel', handleWheel);
+    };
+  }, [handleScroll, handleWheel]);
+
+  useEffect(() => {
+    const pageEl = getContainer();
+    if (!pageEl) return;
+    const itemWidth = pageEl.clientWidth;
     if (itemWidth === 0) return;
     const targetScroll = currentPage * itemWidth;
-    if (Math.abs(container.scrollLeft - targetScroll) > 2) {
+    if (Math.abs(pageEl.scrollLeft - targetScroll) > 2) {
       scrollToPage(currentPage);
     }
   }, [currentPage, scrollToPage]);
