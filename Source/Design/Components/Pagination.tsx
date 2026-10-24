@@ -1,7 +1,6 @@
 import { Strings } from '../../Core/Strings';
 import { Glyph } from './Glyph';
 import { IconButton } from './IconButton';
-import { Dock } from './Dock';
 import styles from './Pagination.module.css';
 
 export interface PaginationProps {
@@ -16,7 +15,7 @@ export function Pagination({ page, pageCount, onPrevious, onNext }: PaginationPr
   const isLast = page >= pageCount - 1;
 
   return (
-    <Dock label={Strings.paginationLabel}>
+    <>
       <IconButton label={Strings.previous} disabled={page === 0} onClick={onPrevious}>
         <Glyph name="ArrowLeft" />
       </IconButton>
@@ -38,6 +37,6 @@ export function Pagination({ page, pageCount, onPrevious, onNext }: PaginationPr
       >
         <Glyph name={isLast ? 'Check' : 'ArrowRight'} />
       </IconButton>
-    </Dock>
+    </>
   );
 }
