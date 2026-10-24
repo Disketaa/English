@@ -1,4 +1,4 @@
-.Root {
+﻿.Root {
   position: relative;
   isolation: isolate;
   display: flex;
@@ -265,3 +265,4 @@
     opacity: 0;
   }
 }
+
