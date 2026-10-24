@@ -1,10 +1,10 @@
 /* Design tokens — mobile-first, iPhone-style unified layout */
 :root {
-  /* Primitive layer */
-  --Color-Blue-500: #3b82f6;
-  --Color-Green-500: #22c55e;
-  --Color-Gray-50: #f9fafb;
-  --Color-Gray-900: #111827;
+  /* Primitive layer — main palette */
+  --Color-Cream: #FCF0DA; /* rgb(252, 240, 218) */
+  --Color-Sage: #AEAC78; /* rgb(174, 172, 120) */
+  --Color-Gold: #F2C46A; /* rgb(242, 196, 106) */
+  --Color-Dark: #4C4541; /* rgb(76, 69, 65) */
   --Space-4: 0.25rem;
   --Space-8: 0.5rem;
   --Space-12: 0.75rem;
@@ -16,13 +16,13 @@
   --Space-48: 3rem;
 
   /* Semantic layer — mobile unified */
-  --Color-Surface-Default: var(--Color-Gray-50);
-  --Color-Surface-Inverse: var(--Color-Gray-900);
-  --Color-Action-Primary-Background: var(--Color-Blue-500);
-  --Color-Action-Primary-Text: #ffffff;
-  --Color-Text-Primary: var(--Color-Gray-900);
-  --Color-Text-Secondary: #6b7280;
-  --Color-Border-Default: #e5e7eb;
+  --Color-Surface-Default: var(--Color-Cream);
+  --Color-Surface-Inverse: var(--Color-Dark);
+  --Color-Action-Primary-Background: var(--Color-Gold);
+  --Color-Action-Primary-Text: var(--Color-Dark);
+  --Color-Text-Primary: var(--Color-Dark);
+  --Color-Text-Secondary: var(--Color-Sage);
+  --Color-Border-Default: var(--Color-Sage);
 
   --Space-Xs: var(--Space-8);
   --Space-Sm: var(--Space-12);
@@ -70,7 +70,7 @@ button, a, input, textarea, select {
 
 /* Focus-visible for keyboard/accessibility */
 :focus-visible {
-  outline: 2px solid var(--Color-Action-Primary-Background);
+  outline: 2px solid var(--Color-Gold);
   outline-offset: 2px;
   border-radius: var(--Radius-Sm);
 }
