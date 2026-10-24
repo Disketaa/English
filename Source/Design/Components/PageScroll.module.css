@@ -1,5 +1,7 @@
 .Root {
   display: flex;
+  flex: 1;
+  min-width: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
