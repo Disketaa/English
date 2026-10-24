@@ -1,3 +1,4 @@
+import { useState } from 'preact/hooks';
 import styles from './ModuleBlock.module.css';
 
 export interface ModuleBlockProps {
@@ -13,8 +14,17 @@ export function ModuleBlock({
   moduleNumber = 1,
   locked = false,
 }: ModuleBlockProps) {
+  const [rippleKey, setRippleKey] = useState(0);
+
+  const handleClick = () => {
+    setRippleKey((k) => k + 1);
+  };
+
   return (
-    <article class={`${styles.Root} ${locked ? styles.Locked : ''}`}>
+    <article
+      class={`${styles.Root} ${locked ? styles.Locked : ''}`}
+      onClick={handleClick}
+    >
       <div class={styles.Content}>
         <h2 class={styles.Title}>
           {title}
@@ -23,6 +33,9 @@ export function ModuleBlock({
         <p class={styles.Subtitle}>{subtitle}</p>
       </div>
       <div class={styles.BigNumber}>№{moduleNumber}</div>
+      {!locked && rippleKey > 0 && (
+        <div key={rippleKey} class={styles.Ripple} />
+      )}
     </article>
   );
 }

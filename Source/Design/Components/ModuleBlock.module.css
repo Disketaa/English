@@ -14,20 +14,52 @@
   width: 100%;
   box-sizing: border-box;
   gap: var(--Space-Md);
-  overflow: hidden;
-  animation:
-    moduleFadeIn 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both,
-    gradientShift 6s ease-in-out infinite;
+  overflow: visible;
+  animation: moduleFadeIn 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both, gradientShift 6s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.Root:active {
+  transform: scale(0.95);
+}
+
+.Pressing {
+  transform: scale(0.95);
+}
+
+.Ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  border-radius: var(--Radius-Lg);
+  background: rgba(242, 196, 106, 0.4);
+  transform: translate(-50%, -50%);
+  animation: rippleFade 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rippleFade {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 @keyframes moduleFadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
