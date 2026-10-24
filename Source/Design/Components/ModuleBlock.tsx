@@ -1,4 +1,5 @@
 import styles from "./ModuleBlock.module.css";
+import { Icon } from "./Icon";
 
 export interface ModuleBlockProps {
   title: string;
@@ -14,7 +15,7 @@ export function ModuleBlock({ title, subtitle, progressLabel = "45'" }: ModuleBl
         <p class={styles.Subtitle}>{subtitle}</p>
       </div>
       <div class={styles.RightSide}>
-        <img src="/Source/Design/Graphic/Notebook.png" alt="Notebook" class={styles.IconImage} />
+        <Icon name="Notebook" alt="Notebook" />
         <div class={styles.IconRing} aria-label="Progress">
           {progressLabel}
         </div>

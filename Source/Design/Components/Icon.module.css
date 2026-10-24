@@ -1,0 +1,7 @@
+.Root {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: var(--Radius-Sm);
+  flex-shrink: 0;
+}
