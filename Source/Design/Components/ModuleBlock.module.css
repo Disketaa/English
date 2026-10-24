@@ -42,8 +42,7 @@
   }
 }
 
-/* Decorative background layer: clips an oversized gradient and drifts it with transform only,
- * so the shift is composited instead of repainting the card. */
+/* Decorative background layer: seeds a module-specific abstract SVG, clipped to the card. */
 .Backdrop {
   position: absolute;
   inset: 0;
@@ -54,27 +53,15 @@
   contain: paint;
 }
 
-.Backdrop::before {
-  content: '';
+.BackdropImage {
   position: absolute;
-  inset: -60%;
-  background: linear-gradient(
-    135deg,
-    var(--Color-Gold) 0%,
-    var(--Color-Sage) 55%,
-    var(--Color-Gold) 100%
-  );
-  will-change: transform;
-  animation: gradientDrift 12s ease-in-out infinite alternate;
-}
-
-@keyframes gradientDrift {
-  from {
-    transform: translate3d(-10%, -6%, 0) scale(1.02);
-  }
-  to {
-    transform: translate3d(10%, 6%, 0) scale(1.02);
-  }
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(2);
+  transform-origin: center;
+  z-index: 0;
 }
 
 .FadeWrapper {
@@ -143,8 +130,8 @@
   cursor: default;
 }
 
-.Locked .Backdrop::before {
-  animation: none;
+.Locked .Backdrop {
+  opacity: 0.6;
 }
 
 .Locked .Title,
@@ -249,7 +236,8 @@
   .Subtitle,
   .BigNumber,
   .NotificationDot,
-  .Backdrop::before {
+  .Backdrop,
+  .BackdropImage {
     animation: none;
   }
 

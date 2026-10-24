@@ -1,12 +1,45 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import styles from './ModuleBlock.module.css';
 
+import bg1 from '../Graphics/Backgrounds/Abstract1.svg';
+import bg2 from '../Graphics/Backgrounds/Abstract2.svg';
+import bg3 from '../Graphics/Backgrounds/Abstract3.svg';
+import bg4 from '../Graphics/Backgrounds/Abstract4.svg';
+import bg5 from '../Graphics/Backgrounds/Abstract5.svg';
+import bg6 from '../Graphics/Backgrounds/Abstract6.svg';
+import bg7 from '../Graphics/Backgrounds/Abstract7.svg';
+import bg8 from '../Graphics/Backgrounds/Abstract8.svg';
+import bg9 from '../Graphics/Backgrounds/Abstract9.svg';
+import bg10 from '../Graphics/Backgrounds/Abstract10.svg';
+import bg11 from '../Graphics/Backgrounds/Abstract11.svg';
+import bg12 from '../Graphics/Backgrounds/Abstract12.svg';
+import bg13 from '../Graphics/Backgrounds/Abstract13.svg';
+import bg14 from '../Graphics/Backgrounds/Abstract14.svg';
+
+const BACKGROUNDS = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13, bg14];
+
+/** Deterministic hash of a string → non-negative integer. */
+function hashString(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  }
+  return h;
+}
+
+/** Pick a background deterministically from a seed string (e.g. lesson id). */
+function seededBackground(seed: string): string {
+  return BACKGROUNDS[hashString(seed) % BACKGROUNDS.length];
+}
+
 export interface ModuleBlockProps {
   title: string;
   subtitle: string;
   moduleNumber?: number;
   locked?: boolean;
   onClick?: () => void;
+  /** Seed for background selection; defaults to title. */
+  seed?: string;
 }
 
 interface RippleState {
@@ -28,7 +61,9 @@ export function ModuleBlock({
   moduleNumber = 1,
   locked = false,
   onClick,
+  seed,
 }: ModuleBlockProps) {
+  const background = seededBackground(seed ?? title);
   const [ripple, setRipple] = useState<RippleState>(CENTER);
   const [pressed, setPressed] = useState(false);
   const pressStartedAt = useRef(0);
@@ -79,7 +114,9 @@ export function ModuleBlock({
       onPointerLeave={endPress}
       onClick={onClick}
     >
-      <div class={styles.Backdrop} aria-hidden="true" />
+      <div class={styles.Backdrop} aria-hidden="true">
+        {background && <img src={background} class={styles.BackdropImage} alt="" />}
+      </div>
       <div class={styles.FadeWrapper}>
         <div class={styles.Content}>
           <h2 class={styles.Title}>
