@@ -6,6 +6,7 @@ export interface ModuleBlockProps {
   subtitle: string;
   moduleNumber?: number;
   locked?: boolean;
+  onClick?: () => void;
 }
 
 interface RippleState {
@@ -26,6 +27,7 @@ export function ModuleBlock({
   subtitle,
   moduleNumber = 1,
   locked = false,
+  onClick,
 }: ModuleBlockProps) {
   const [ripple, setRipple] = useState<RippleState>(CENTER);
   const [pressed, setPressed] = useState(false);
@@ -75,6 +77,7 @@ export function ModuleBlock({
       onPointerUp={endPress}
       onPointerCancel={endPress}
       onPointerLeave={endPress}
+      onClick={onClick}
     >
       <div class={styles.Backdrop} aria-hidden="true" />
       <div class={styles.FadeWrapper}>

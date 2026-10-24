@@ -1,0 +1,18 @@
+.Root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Item {
+  padding: var(--Space-Sm) var(--Space-Md);
+  border-left: 0.1875rem solid var(--Color-Border-Default);
+  border-radius: var(--Radius-Sm);
+  color: var(--Color-Text-Primary);
+  font-family: var(--Font-Body);
+  font-size: 1rem;
+  line-height: 1.5;
+}

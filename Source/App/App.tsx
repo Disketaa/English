@@ -1,28 +1,44 @@
-import { Stack } from '../Design/Primitives/Stack';
-import { ModuleBlock } from '../Design/Components/ModuleBlock';
+import { useEffect } from 'preact/hooks';
 import { lessons } from '../Content/Lessons';
+import { HomeScreen } from '../Screens/Home/HomeScreen';
+import { LessonScreen } from '../Screens/Lesson/LessonScreen';
+import { emptyLessonProgress } from '../Storage/ProgressStore';
+import { homeUrl, lessonUrl, navigate, useRoute } from './UseRoute';
+import { useProgress } from './UseProgress';
 
 export function App() {
-  return (
-    <Stack gap="Lg">
-      <header>
-        <h1>English Learning</h1>
-        <p>Mobile-first unified design. iPhone-style layout.</p>
-      </header>
+  const route = useRoute();
+  const { progress, patchLesson } = useProgress();
 
-      <main>
-        <Stack gap="Md">
-          {lessons.map((lesson, index) => (
-            <ModuleBlock
-              key={lesson.id}
-              title={lesson.title}
-              subtitle={lesson.subtitle}
-              moduleNumber={index + 1}
-              locked={lesson.locked}
-            />
-          ))}
-        </Stack>
-      </main>
-    </Stack>
+  const lesson =
+    route.name === 'Lesson' ? lessons.find((item) => item.id === route.lessonId) : undefined;
+  const stored =
+    lesson === undefined ? emptyLessonProgress : (progress[lesson.id] ?? emptyLessonProgress);
+  const lastPage = lesson === undefined ? 0 : Math.max(0, lesson.pages.length - 1);
+  const page = Math.min(route.name === 'Lesson' ? route.page : 0, lastPage);
+
+  // The URL owns the page, so back/forward and pasted links both persist.
+  useEffect(() => {
+    if (lesson !== undefined) patchLesson(lesson.id, { page });
+  }, [lesson?.id, page]);
+
+  const openLesson = (lessonId: string) => {
+    const saved = progress[lessonId];
+    navigate(lessonUrl(lessonId, saved === undefined ? 0 : saved.page));
+  };
+
+  if (lesson === undefined) {
+    return <HomeScreen lessons={lessons} onOpen={openLesson} />;
+  }
+
+  return (
+    <LessonScreen
+      lesson={lesson}
+      page={page}
+      favourite={stored.favourite}
+      onBack={() => navigate(homeUrl())}
+      onPageChange={(next) => navigate(lessonUrl(lesson.id, next))}
+      onToggleFavourite={() => patchLesson(lesson.id, { favourite: !stored.favourite })}
+    />
   );
 }

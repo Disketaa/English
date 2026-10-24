@@ -1,0 +1,31 @@
+.Root {
+  margin: 0;
+  color: var(--Color-Text-Primary);
+  font-family: var(--Font-Body);
+  text-wrap: pretty;
+}
+
+.VariantTitle {
+  font-family: var(--Font-Title);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.VariantSubtitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.VariantBody {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.VariantCaption {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--Color-Text-Secondary);
+}

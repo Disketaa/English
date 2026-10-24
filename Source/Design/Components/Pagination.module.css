@@ -1,0 +1,36 @@
+.Root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--Space-Sm);
+  padding-top: var(--Space-Md);
+  border-top: 0.0625rem solid var(--Color-Border-Default);
+}
+
+.Pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--Space-Xs);
+}
+
+.Dots {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.Dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--Color-Border-Default);
+  transition:
+    width 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 260ms ease;
+}
+
+.DotActive {
+  width: 1rem;
+  background: var(--Color-Text-Primary);
+}
