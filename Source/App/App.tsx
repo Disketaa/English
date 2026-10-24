@@ -37,7 +37,6 @@ export function App() {
       page={page}
       favourite={stored.favourite}
       onBack={() => navigate(homeUrl())}
-      onPageChange={(next) => navigate(lessonUrl(lesson.id, next))}
       onToggleFavourite={() => patchLesson(lesson.id, { favourite: !stored.favourite })}
     />
   );

@@ -4,7 +4,6 @@ import { Stack } from '../../Design/Primitives/Stack';
 import { Text } from '../../Design/Primitives/Text';
 import { Reveal } from '../../Design/Primitives/Reveal';
 import { ExampleList } from '../../Design/Components/ExampleList';
-import { Pagination } from '../../Design/Components/Pagination';
 import { Button } from '../../Design/Components/Button';
 import { Glyph } from '../../Design/Components/Glyph';
 import { IconButton } from '../../Design/Components/IconButton';
@@ -26,7 +25,6 @@ export interface LessonScreenProps {
   page: number;
   favourite: boolean;
   onBack: () => void;
-  onPageChange: (page: number) => void;
   onToggleFavourite: () => void;
 }
 
@@ -35,7 +33,6 @@ export function LessonScreen({
   page,
   favourite,
   onBack,
-  onPageChange,
   onToggleFavourite,
 }: LessonScreenProps) {
   const current = lesson.pages[page];
@@ -52,7 +49,6 @@ export function LessonScreen({
     );
   }
 
-  const isLast = page >= lesson.pages.length - 1;
   const starts = blockStarts(current.blocks);
 
   return (
@@ -95,13 +91,6 @@ export function LessonScreen({
           </Stack>
         </div>
       </Stack>
-
-      <Pagination
-        page={page}
-        pageCount={lesson.pages.length}
-        onPrevious={() => onPageChange(page - 1)}
-        onNext={() => (isLast ? onBack() : onPageChange(page + 1))}
-      />
     </div>
   );
 }
