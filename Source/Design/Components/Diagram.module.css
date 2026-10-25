@@ -1,0 +1,77 @@
+.Outer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.Wrapper {
+  position: absolute;
+  top: 0;
+  transform-origin: top left;
+}
+
+.Svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  overflow: visible;
+}
+
+.Edge {
+  fill: none;
+  stroke: var(--Color-Border-Default);
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+.Node {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--Radius-Md);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--Color-Text-Primary);
+  font-family: var(--Font-Body);
+  padding: 0 var(--Space-8);
+  box-sizing: border-box;
+}
+
+.Question {
+  background: color-mix(in srgb, var(--Color-Cream-Deep) 25%, transparent);
+  border: none;
+  border-radius: var(--Radius-Md);
+  outline: 2px solid var(--Color-Cream);
+  outline-offset: 0;
+}
+
+.Result {
+  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
+  border: none;
+  border-radius: var(--Radius-Md);
+  box-shadow: none;
+  outline: 2px solid var(--Color-Cream);
+  outline-offset: 0;
+}
+
+.Choice {
+  position: absolute;
+  z-index: 2;
+  color: var(--Color-Dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-shadow:
+    -1px -1px 0 var(--Color-Cream),
+    1px -1px 0 var(--Color-Cream),
+    -1px 1px 0 var(--Color-Cream),
+    1px 1px 0 var(--Color-Cream);
+}

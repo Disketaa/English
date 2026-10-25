@@ -9,7 +9,10 @@ export interface TextProps {
   children: ComponentChildren;
 }
 
-function parseHighlights(text: string): Array<string | ReturnType<typeof Highlight>> {
+function parseHighlights(
+  text: string,
+  lineIndex: number
+): Array<string | ReturnType<typeof Highlight>> {
   const nodes: Array<string | ReturnType<typeof Highlight>> = [];
   const regex = /\*\*([^*]*)\*\*|\*([^*]*)\*/g;
   let lastIndex = 0;
@@ -18,7 +21,9 @@ function parseHighlights(text: string): Array<string | ReturnType<typeof Highlig
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
     }
-    nodes.push(<Highlight key={match.index}>{match[1] ?? match[2]}</Highlight>);
+    nodes.push(
+      <Highlight key={`${lineIndex}-${match.index}`}>{match[1] ?? match[2]}</Highlight>
+    );
     lastIndex = regex.lastIndex;
   }
   if (lastIndex < text.length) {
@@ -32,7 +37,7 @@ export function highlightNodes(text: string): Array<unknown> {
   const nodes: Array<unknown> = [];
   const lines = text.split('\n');
   lines.forEach((line, li) => {
-    nodes.push(...parseHighlights(line));
+    nodes.push(...parseHighlights(line, li));
     if (li < lines.length - 1) nodes.push(<br key={`br-${li}`} />);
   });
   return nodes;

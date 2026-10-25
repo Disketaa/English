@@ -166,7 +166,7 @@ export const articlesLesson: Lesson = {
           kind: 'Examples',
           items: [
             '**ㅤ** Birds eat **ㅤ** worms. — Птицы едят червей.',
-            'I like **ㅤ** dogs. — Я люблю собак.'
+            'I like **ㅤ** dogs. — Я люблю собак.',
           ],
         },
         {
@@ -230,7 +230,7 @@ export const articlesLesson: Lesson = {
             'Play **the** **piano**. — Играть на пианино',
             '**The** **Pacific** Ocean. — Тихий океан',
             '**The** **Netherlands** — Нидерланды',
-            '**The** **best** day. — Самый лучший день'
+            '**The** **best** day. — Самый лучший день',
           ],
         },
       ],
@@ -240,20 +240,28 @@ export const articlesLesson: Lesson = {
       blocks: [
         { kind: 'Subtitle', text: 'Простая схема' },
         {
-          kind: 'Text',
-          text: 'Если сомневаетесь, пройдите по трём шагам.',
-        },
-        {
-          kind: 'Text',
-          text: '**Шаг 1.** Это один предмет, который можно посчитать? Если нет — артикля, скорее всего, не нужно.',
-        },
-        {
-          kind: 'Text',
-          text: '**Шаг 2.** Собеседник знает, какой именно предмет? Если да — ставим **the**.',
-        },
-        {
-          kind: 'Text',
-          text: '**Шаг 3.** Это новый предмет или «один из многих»? Тогда ставим **a/an**.',
+          kind: 'Diagram',
+          start: 'root',
+          nodes: [
+            { id: 'root', text: 'Это исчисляемое существительное?', kind: 'question' },
+            { id: 'singular', text: 'В единственном числе?', kind: 'question' },
+            { id: 'concrete', text: 'Что-то конкретное?', kind: 'question' },
+            { id: 'specific', text: 'Конкретный предмет?', kind: 'question' },
+            { id: 'rThe1', text: 'Артикль the', kind: 'result' },
+            { id: 'rA', text: 'Артикль a (an)', kind: 'result' },
+            { id: 'rThe2', text: 'Артикль the', kind: 'result' },
+            { id: 'rNone', text: 'Нет артикля', kind: 'result' },
+          ],
+          edges: [
+            { from: 'root', to: 'singular', label: 'Да' },
+            { from: 'root', to: 'concrete', label: 'Нет' },
+            { from: 'singular', to: 'specific', label: 'Да' },
+            { from: 'singular', to: 'rThe2', label: 'Нет' },
+            { from: 'specific', to: 'rThe1', label: 'Да' },
+            { from: 'specific', to: 'rA', label: 'Нет' },
+            { from: 'concrete', to: 'rThe2', label: 'Да' },
+            { from: 'concrete', to: 'rNone', label: 'Нет' },
+          ],
         },
         { kind: 'Subtitle', text: 'Короткая шпаргалка' },
         {

@@ -2,7 +2,22 @@
 export type ContentBlock =
   | { kind: 'Subtitle'; text: string }
   | { kind: 'Text'; text: string }
-  | { kind: 'Examples'; items: string[] };
+  | { kind: 'Examples'; items: string[] }
+  | { kind: 'Diagram'; nodes: DiagramNode[]; edges: DiagramEdge[]; start: string };
+
+/** A node in a lesson flowchart diagram. */
+export interface DiagramNode {
+  id: string;
+  text: string;
+  kind: 'question' | 'result';
+}
+
+/** A directed edge between diagram nodes, labelled with the answer choice. */
+export interface DiagramEdge {
+  from: string;
+  to: string;
+  label: 'Да' | 'Нет';
+}
 
 /** One paginated screen of a lesson. */
 export interface LessonPage {

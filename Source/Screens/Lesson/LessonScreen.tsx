@@ -5,6 +5,7 @@ import { Stack } from '../../Design/Primitives/Stack';
 import { Text } from '../../Design/Primitives/Text';
 import { Reveal } from '../../Design/Primitives/Reveal';
 import { ExampleList } from '../../Design/Components/ExampleList';
+import { Diagram } from '../../Design/Components/Diagram';
 import { Button } from '../../Design/Components/Button';
 import { Glyph } from '../../Design/Components/Glyph';
 import { IconButton } from '../../Design/Components/IconButton';
@@ -101,7 +102,7 @@ export function LessonScreen({
                 <Reveal index={0}>
                   <Text variant="Title">{pageContent.nav}</Text>
                 </Reveal>
-                  <Stack gap="Lg" padded={false}>
+                <Stack gap="Lg" padded={false}>
                   {pageContent.blocks.map((block, blockIndex) => {
                     if (block.kind === 'Examples') {
                       return (
@@ -110,6 +111,17 @@ export function LessonScreen({
                           items={block.items}
                           startIndex={starts[blockIndex]}
                         />
+                      );
+                    }
+                    if (block.kind === 'Diagram') {
+                      return (
+                        <Reveal key={blockIndex} index={starts[blockIndex]}>
+                          <Diagram
+                            nodes={block.nodes}
+                            edges={block.edges}
+                            start={block.start}
+                          />
+                        </Reveal>
                       );
                     }
                     return (
