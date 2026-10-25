@@ -103,6 +103,8 @@ export function TestBlock({ test }: TestBlockProps) {
                 class={`${styles.Blank} ${submitted ? (normalize(vals[i]) === normalize(expected[i] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
                 type="text"
                 value={vals[i]}
+                maxLength={Math.max(3, (expected[i] ?? '').length + 2)}
+                style={{ width: `${Math.max(3, (expected[i] ?? '').length + 2) * 0.6 + 1}rem` }}
                 onInput={(e) => {
                   const target = e.currentTarget;
                   if (target instanceof HTMLInputElement) {
