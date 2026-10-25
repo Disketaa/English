@@ -1,5 +1,36 @@
 import { Lesson, Test } from '../../Core/Types';
 
+export const articlesTest: Test = {
+  title: 'Тест по теме «Артикли»',
+  questions: [
+    { id: '1', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a / The', explanation: 'Собака упоминается впервые, поэтому a. Во втором предложении это уже известная собака, поэтому the.', type: 'fill' },
+    { id: '2', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово apple начинается с гласного звука, поэтому an.', type: 'fill' },
+    { id: '3', prompt: 'He is ___ doctor.', answer: 'a', explanation: 'Профессия называется с a/an. Doctor начинается с согласного звука.', type: 'fill' },
+    { id: '4', prompt: 'Please close ___ door. (вы оба видите, какую дверь)', answer: 'the', explanation: 'Из ситуации ясно, о какой двери речь.', type: 'fill' },
+    { id: '5', prompt: '___ sun is hot.', answer: 'The', explanation: 'Солнце одно на весь мир.', type: 'fill' },
+    { id: '6', prompt: 'I like ___ dogs. (собак вообще)', answer: '—', explanation: 'Говорим о собаках вообще, во множественном числе. Нужен нулевой артикль.', type: 'fill' },
+    { id: '7', prompt: '___ water freezes at 0°C.', answer: '—', explanation: 'Water неисчисляемое, и речь о воде в целом. Нужен нулевой артикль.', type: 'fill' },
+    { id: '8', prompt: 'It takes me ___ hour to get home.', answer: 'an', explanation: 'Буква h в hour не произносится, слово начинается с гласного звука.', type: 'fill' },
+    { id: '9', prompt: 'He studies at ___ university.', answer: 'a', explanation: 'University начинается со звука «ю», это согласный звук. Здесь важен звук, а не буква.', type: 'fill' },
+    { id: '10', prompt: 'Let\'s have ___ breakfast.', answer: '—', explanation: 'Приёмы пищи употребляются без артикля.', type: 'fill' },
+    { id: '11', prompt: 'I speak ___ English.', answer: '—', explanation: 'Языки употребляются без артикля.', type: 'fill' },
+    { id: '12', prompt: 'She plays ___ tennis.', answer: '—', explanation: 'Виды спорта употребляются без артикля.', type: 'fill' },
+    { id: '13', prompt: 'He plays ___ piano.', answer: 'the', explanation: 'Музыкальные инструменты употребляются с the.', type: 'fill' },
+    { id: '14', prompt: 'We travel by ___ train.', answer: '—', explanation: 'Фраза by + транспорт пишется без артикля (by train, by bus).', type: 'fill' },
+    { id: '15', prompt: 'I go to ___ school every day. (чтобы учиться)', answer: '—', explanation: 'Идём в школу по назначению, то есть учиться. Артикля нет.', type: 'fill' },
+    { id: '16', prompt: 'I went to ___ school to meet ___ teacher. (в здание школы; учитель «какой-то»)', answer: 'the / a', explanation: 'Здесь конкретное здание, поэтому the school. Учитель «какой-то», из контекста непонятно какой, поэтому a teacher.', type: 'fill' },
+    { id: '17', prompt: '___ Pacific Ocean is huge.', answer: 'The', explanation: 'Океаны, моря и реки употребляются с the.', type: 'fill' },
+    { id: '18', prompt: 'It\'s ___ best day of my life.', answer: 'the', explanation: 'Превосходная степень («самый-самый») всегда с the.', type: 'fill' },
+    { id: '19', prompt: '___ children need sleep. (все дети вообще)', answer: '—', explanation: 'Дети вообще, множественное число, нулевой артикль.', type: 'fill' },
+    { id: '20', prompt: '___ children are asleep. (конкретные дети)', answer: 'The', explanation: 'Это конкретные дети, о которых знают оба собеседника.', type: 'fill' },
+    { id: '21', prompt: 'Я вижу кошку. Кошка чёрная.', answer: 'I see a cat. The cat is black.', explanation: 'Первое упоминание даёт a, повторное даёт the.', type: 'translate' },
+    { id: '22', prompt: 'Она архитектор.', answer: 'She is an architect.', explanation: 'Профессия берёт a/an. Architect начинается с гласного звука, поэтому an.', type: 'translate' },
+    { id: '23', prompt: 'Луна сегодня яркая.', answer: 'The moon is bright tonight.', explanation: 'Луна одна, поэтому the.', type: 'translate' },
+  ],
+  scoring: { excellent: 20, good: 15 },
+};
+
+
 export const articlesLesson: Lesson = {
   id: 'articles',
   title: 'Артикли',
@@ -309,34 +340,4 @@ export const articlesLesson: Lesson = {
       ],
     },
   ],
-};
-
-export const articlesTest: Test = {
-  title: 'Тест по теме «Артикли»',
-  questions: [
-    { id: '1', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a / The', explanation: 'Собака упоминается впервые, поэтому a. Во втором предложении это уже известная собака, поэтому the.', type: 'fill' },
-    { id: '2', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово apple начинается с гласного звука, поэтому an.', type: 'fill' },
-    { id: '3', prompt: 'He is ___ doctor.', answer: 'a', explanation: 'Профессия называется с a/an. Doctor начинается с согласного звука.', type: 'fill' },
-    { id: '4', prompt: 'Please close ___ door. (вы оба видите, какую дверь)', answer: 'the', explanation: 'Из ситуации ясно, о какой двери речь.', type: 'fill' },
-    { id: '5', prompt: '___ sun is hot.', answer: 'The', explanation: 'Солнце одно на весь мир.', type: 'fill' },
-    { id: '6', prompt: 'I like ___ dogs. (собак вообще)', answer: '—', explanation: 'Говорим о собаках вообще, во множественном числе. Нужен нулевой артикль.', type: 'fill' },
-    { id: '7', prompt: '___ water freezes at 0°C.', answer: '—', explanation: 'Water неисчисляемое, и речь о воде в целом. Нужен нулевой артикль.', type: 'fill' },
-    { id: '8', prompt: 'It takes me ___ hour to get home.', answer: 'an', explanation: 'Буква h в hour не произносится, слово начинается с гласного звука.', type: 'fill' },
-    { id: '9', prompt: 'He studies at ___ university.', answer: 'a', explanation: 'University начинается со звука «ю», это согласный звук. Здесь важен звук, а не буква.', type: 'fill' },
-    { id: '10', prompt: 'Let\'s have ___ breakfast.', answer: '—', explanation: 'Приёмы пищи употребляются без артикля.', type: 'fill' },
-    { id: '11', prompt: 'I speak ___ English.', answer: '—', explanation: 'Языки употребляются без артикля.', type: 'fill' },
-    { id: '12', prompt: 'She plays ___ tennis.', answer: '—', explanation: 'Виды спорта употребляются без артикля.', type: 'fill' },
-    { id: '13', prompt: 'He plays ___ piano.', answer: 'the', explanation: 'Музыкальные инструменты употребляются с the.', type: 'fill' },
-    { id: '14', prompt: 'We travel by ___ train.', answer: '—', explanation: 'Фраза by + транспорт пишется без артикля (by train, by bus).', type: 'fill' },
-    { id: '15', prompt: 'I go to ___ school every day. (чтобы учиться)', answer: '—', explanation: 'Идём в школу по назначению, то есть учиться. Артикля нет.', type: 'fill' },
-    { id: '16', prompt: 'I went to ___ school to meet ___ teacher. (в здание школы; учитель «какой-то»)', answer: 'the / a', explanation: 'Здесь конкретное здание, поэтому the school. Учитель «какой-то», из контекста непонятно какой, поэтому a teacher.', type: 'fill' },
-    { id: '17', prompt: '___ Pacific Ocean is huge.', answer: 'The', explanation: 'Океаны, моря и реки употребляются с the.', type: 'fill' },
-    { id: '18', prompt: 'It\'s ___ best day of my life.', answer: 'the', explanation: 'Превосходная степень («самый-самый») всегда с the.', type: 'fill' },
-    { id: '19', prompt: '___ children need sleep. (все дети вообще)', answer: '—', explanation: 'Дети вообще, множественное число, нулевой артикль.', type: 'fill' },
-    { id: '20', prompt: '___ children are asleep. (конкретные дети)', answer: 'The', explanation: 'Это конкретные дети, о которых знают оба собеседника.', type: 'fill' },
-    { id: '21', prompt: 'Я вижу кошку. Кошка чёрная.', answer: 'I see a cat. The cat is black.', explanation: 'Первое упоминание даёт a, повторное даёт the.', type: 'translate' },
-    { id: '22', prompt: 'Она архитектор.', answer: 'She is an architect.', explanation: 'Профессия берёт a/an. Architect начинается с гласного звука, поэтому an.', type: 'translate' },
-    { id: '23', prompt: 'Луна сегодня яркая.', answer: 'The moon is bright tonight.', explanation: 'Луна одна, поэтому the.', type: 'translate' },
-  ],
-  scoring: { excellent: 20, good: 15 },
 };
