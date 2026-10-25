@@ -11,20 +11,19 @@ export interface TextProps {
 
 /** Split a text string into plain strings and <Highlight> elements using *markdown* markers. */
 export function highlightNodes(text: string): Array<string | ReturnType<typeof Highlight>> {
-  const parts = text.split(/\*([^*]+)\*/);
   const nodes: Array<string | ReturnType<typeof Highlight>> = [];
-  let plain = '';
-  for (let index = 0; index < parts.length; index++) {
-    const part = parts[index];
-    if (index % 2 === 0) {
-      plain += part;
-      if (plain !== '') {
-        nodes.push(plain);
-        plain = '';
-      }
-      continue;
+  const regex = /\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
     }
-    nodes.push(<Highlight key={index}>{part}</Highlight>);
+    nodes.push(<Highlight key={match.index}>{match[1] ?? match[2]}</Highlight>);
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
   }
   return nodes;
 }
