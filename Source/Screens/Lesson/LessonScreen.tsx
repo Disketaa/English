@@ -101,7 +101,7 @@ export function LessonScreen({
                 }}
               >
                 <Reveal index={0}>
-                  <NavTitle title={pageContent.nav} seed={lesson.id + pageIndex} />
+                  <NavTitle title={pageContent.nav} seed={lesson.id + pageIndex} index={pageIndex + 1} />
                 </Reveal>
                 <Stack gap="Lg" padded={false}>
                   {pageContent.blocks.map((block, blockIndex) => {

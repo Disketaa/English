@@ -32,15 +32,17 @@ function seededBackground(seed: string): string {
 export interface NavTitleProps {
   title: string;
   seed?: string;
+  index?: number;
 }
 
-export function NavTitle({ title, seed }: NavTitleProps) {
+export function NavTitle({ title, seed, index }: NavTitleProps) {
   const background = seededBackground(seed ?? title);
   return (
     <div class={styles.Root}>
       <div class={styles.Backdrop} aria-hidden="true">
         {background && <img src={background} class={styles.BackdropImage} alt="" />}
       </div>
+      {index !== undefined && <div class={styles.BigNumber}>№{index}</div>}
       <h2 class={styles.Title}>{title}</h2>
     </div>
   );
