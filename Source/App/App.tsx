@@ -1,4 +1,3 @@
-import { useEffect } from 'preact/hooks';
 import { lessons } from '../Content/Lessons';
 import { HomeScreen } from '../Screens/Home/HomeScreen';
 import { LessonScreen } from '../Screens/Lesson/LessonScreen';
@@ -17,14 +16,9 @@ export function App() {
   const lastPage = lesson === undefined ? 0 : Math.max(0, lesson.pages.length - 1);
   const page = Math.min(route.name === 'Lesson' ? route.page : 0, lastPage);
 
-  // The URL owns the page, so back/forward and pasted links both persist.
-  useEffect(() => {
-    if (lesson !== undefined) patchLesson(lesson.id, { page });
-  }, [lesson?.id, page]);
-
   const openLesson = (lessonId: string) => {
-    const saved = progress[lessonId];
-    navigate(lessonUrl(lessonId, saved === undefined ? 0 : saved.page));
+    window.scrollTo(0, 0);
+    navigate(lessonUrl(lessonId, 0));
   };
 
   if (lesson === undefined) {
@@ -35,7 +29,6 @@ export function App() {
     <LessonScreen
       lesson={lesson}
       page={page}
-      reachedPage={stored.page}
       favourite={stored.favourite}
       onBack={() => navigate(homeUrl())}
       onPageChange={(next) => navigate(lessonUrl(lesson.id, next))}

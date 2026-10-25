@@ -1,7 +1,7 @@
 import { ComponentChildren } from 'preact';
 import styles from './Button.module.css';
 
-export type ButtonVariant = 'Primary' | 'Secondary';
+export type ButtonVariant = 'Primary' | 'Secondary' | 'Success' | 'Subtle';
 
 export interface ButtonProps {
   variant?: ButtonVariant;

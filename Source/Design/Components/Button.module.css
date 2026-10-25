@@ -31,6 +31,16 @@
   color: var(--Color-Action-Primary-Text);
 }
 
+.VariantSuccess {
+  background: var(--Color-Action-Success-Background);
+  color: var(--Color-Action-Success-Text);
+}
+
+.VariantSubtle {
+  background: var(--Color-Action-Subtle-Background);
+  color: var(--Color-Action-Subtle-Text);
+}
+
 .VariantSecondary {
   background: var(--Color-Glass-Background);
   color: var(--Color-Text-Primary);

@@ -2,6 +2,7 @@
 :root {
   /* Primitive layer — main palette */
   --Color-Cream: #fcf0da;
+  --Color-Cream-Deep: #e9d9b8;
   --Color-Sage: #aeac78;
   --Color-Gold: #f2c46a;
   --Color-Dark: #4c4541;
@@ -21,9 +22,14 @@
   --Color-Surface-Inverse: var(--Color-Dark);
   --Color-Action-Primary-Background: var(--Color-Gold);
   --Color-Action-Primary-Text: var(--Color-Dark);
+  --Color-Action-Success-Background: var(--Color-Green-Deep);
+  --Color-Action-Success-Text: var(--Color-Cream);
+  --Color-Action-Subtle-Background: var(--Color-Cream-Deep);
+  --Color-Action-Subtle-Text: var(--Color-Text-Primary);
   --Color-Text-Primary: var(--Color-Dark);
   --Color-Text-Secondary: var(--Color-Sage);
   --Color-Border-Default: var(--Color-Sage);
+  --Color-Border-Subtle: var(--Color-Cream-Deep);
 
   /* Glass layer: translucent surfaces that blur what scrolls behind them. */
   --Color-Glass-Background: rgba(252, 240, 218, 0.34);
@@ -71,7 +77,12 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {

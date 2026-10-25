@@ -1,4 +1,4 @@
-import { ComponentChildren, RefObject } from 'preact';
+import { ComponentChildren } from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 import styles from './PageScroll.module.css';
 
@@ -6,71 +6,52 @@ export interface PageScrollProps {
   currentPage: number;
   onPageChange: (page: number) => void;
   children: ComponentChildren;
-  /** External scroll container (e.g. the lesson main area). Scrolls that instead of self. */
-  scrollContainerRef?: RefObject<HTMLDivElement>;
 }
 
-export function PageScroll({
-  currentPage,
-  onPageChange,
-  children,
-  scrollContainerRef,
-}: PageScrollProps) {
+/** A page becomes current once its top passes this offset. */
+const PageOffset = 60;
+
+export function PageScroll({ currentPage, onPageChange, children }: PageScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isProgrammatic = useRef(false);
+  const scrolledPage = useRef(currentPage === 0 ? 0 : -1);
 
-  const scrollEl = () => scrollContainerRef.current ?? containerRef.current;
-
-  const scrollToPage = useCallback(
-    (page: number) => {
-      const panel = scrollEl()?.children[page];
-      if (!(panel instanceof HTMLElement)) return;
-      isProgrammatic.current = true;
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      isProgrammatic.current = false;
-    },
-    [scrollContainerRef]
-  );
+  const scrollToPage = useCallback((page: number) => {
+    const panel = containerRef.current?.children[page];
+    if (!(panel instanceof HTMLElement)) return;
+    isProgrammatic.current = true;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    isProgrammatic.current = false;
+  }, []);
 
   const handleScroll = useCallback(() => {
     if (isProgrammatic.current) return;
-    const el = scrollEl();
-    if (!el) return;
-    const panels = Array.from(el.children);
+    const panels = Array.from(containerRef.current?.children ?? []);
     let current = 0;
     for (const [index, panel] of panels.entries()) {
       if (!(panel instanceof HTMLElement)) continue;
-      const rect = panel.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      const relativeTop = rect.top - elRect.top;
-      if (relativeTop <= 60) {
+      if (panel.getBoundingClientRect().top <= PageOffset) {
         current = index;
       } else {
         break;
       }
     }
+    const atBottom =
+      window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - PageOffset;
+    if (atBottom) current = panels.length - 1;
+    scrolledPage.current = current;
     onPageChange(current);
-  }, [onPageChange, scrollContainerRef]);
+  }, [onPageChange]);
 
   useEffect(() => {
-    const el = scrollEl();
-    if (!el) return;
-    el.addEventListener('scroll', handleScroll, { passive: true });
-    return () => el.removeEventListener('scroll', handleScroll);
-  }, [handleScroll, scrollContainerRef]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
-    const el = scrollEl();
-    if (!el) return;
-    const panel = el.children[currentPage];
-    if (!(panel instanceof HTMLElement)) return;
-    const rect = panel.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    const relativeTop = rect.top - elRect.top;
-    if (relativeTop < 0 || relativeTop >= elRect.height) {
-      scrollToPage(currentPage);
-    }
-  }, [currentPage, scrollToPage, scrollContainerRef]);
+    if (currentPage === scrolledPage.current) return;
+    scrollToPage(currentPage);
+  }, [currentPage, scrollToPage]);
 
   const pageNodes = Array.isArray(children) ? children : [children];
   return (

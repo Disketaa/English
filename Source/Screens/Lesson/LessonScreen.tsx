@@ -1,7 +1,6 @@
 import { ContentBlock, Lesson } from '../../Core/Types';
 import { Strings } from '../../Core/Strings';
-import { Fragment } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 import { Stack } from '../../Design/Primitives/Stack';
 import { Text } from '../../Design/Primitives/Text';
 import { Reveal } from '../../Design/Primitives/Reveal';
@@ -10,7 +9,6 @@ import { Button } from '../../Design/Components/Button';
 import { Glyph } from '../../Design/Components/Glyph';
 import { IconButton } from '../../Design/Components/IconButton';
 import { PageScroll } from '../../Design/Components/PageScroll';
-import { LessonTimeline } from '../../Design/Components/LessonTimeline';
 import styles from './LessonScreen.module.css';
 
 /** Reveal positions for each block; an example list claims one slot per item. */
@@ -27,8 +25,6 @@ export interface LessonScreenProps {
   lesson: Lesson;
   /** 0-based current page. */
   page: number;
-  /** 0-based furthest page reached; drives timeline reachability. */
-  reachedPage: number;
   favourite: boolean;
   onBack: () => void;
   onPageChange: (page: number) => void;
@@ -38,25 +34,39 @@ export interface LessonScreenProps {
 export function LessonScreen({
   lesson,
   page,
-  reachedPage,
   favourite,
   onBack,
   onPageChange,
   onToggleFavourite,
 }: LessonScreenProps) {
   const [currentPage, setCurrentPage] = useState(page);
-  const mainRef = useRef<HTMLDivElement>(null);
+  const [visiblePage, setVisiblePage] = useState(page);
+  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pendingScroll = useRef<number | null>(null);
 
-  // Sync to URL when the user scrolls or taps the timeline.
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-    onPageChange(newPage);
-  };
+  // Sync to URL when the user scrolls or unlocks a page.
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      setCurrentPage(newPage);
+      setVisiblePage((current) => Math.max(current, newPage));
+      onPageChange(newPage);
+    },
+    [onPageChange]
+  );
 
   // Sync from URL when deep-linking or using back/forward.
   useEffect(() => {
     setCurrentPage(page);
+    setVisiblePage((current) => Math.max(current, page));
   }, [page]);
+
+  // Scroll to a page once its newly unlocked content is mounted.
+  useEffect(() => {
+    const target = pendingScroll.current;
+    if (target === null) return;
+    pendingScroll.current = null;
+    pageRefs.current[target]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [visiblePage]);
 
   return (
     <div class={styles.Root}>
@@ -74,16 +84,20 @@ export function LessonScreen({
         </IconButton>
       </div>
 
-      <div class={styles.Main} ref={mainRef}>
-        <PageScroll
-          scrollContainerRef={mainRef}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        >
-          {lesson.pages.map((pageContent, pageIndex) => {
+      <div class={styles.Main}>
+        <PageScroll currentPage={currentPage} onPageChange={handlePageChange}>
+          {lesson.pages.slice(0, visiblePage + 1).map((pageContent, pageIndex) => {
             const starts = blockStarts(pageContent.blocks);
+            const isLast = pageIndex === lesson.pages.length - 1;
+            const isFrontier = pageIndex === visiblePage;
             return (
-              <Fragment key={pageIndex}>
+              <div
+                key={pageIndex}
+                class={`${styles.Page} ${pageIndex > 0 ? styles.PageSeparated : ''}`}
+                ref={(element) => {
+                  pageRefs.current[pageIndex] = element;
+                }}
+              >
                 <Reveal index={0}>
                   <Text variant="Title">{pageContent.nav}</Text>
                 </Reveal>
@@ -107,16 +121,25 @@ export function LessonScreen({
                     );
                   })}
                 </Stack>
-              </Fragment>
+                {isFrontier && (
+                  <Button
+                    variant={isLast ? 'Success' : 'Subtle'}
+                    onClick={
+                      isLast
+                        ? onBack
+                        : () => {
+                            pendingScroll.current = pageIndex + 1;
+                            handlePageChange(pageIndex + 1);
+                          }
+                    }
+                  >
+                    {isLast ? Strings.finish : Strings.understood}
+                  </Button>
+                )}
+              </div>
             );
           })}
         </PageScroll>
-        <LessonTimeline
-          pages={lesson.pages}
-          currentPage={currentPage}
-          reachedPage={reachedPage}
-          onPageClick={handlePageChange}
-        />
       </div>
     </div>
   );
