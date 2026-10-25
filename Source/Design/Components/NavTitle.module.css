@@ -3,8 +3,8 @@
   isolation: isolate;
   display: flex;
   align-items: center;
-  padding: var(--Space-Sm) var(--Space-Xl);
-  border-radius: var(--Radius-Lg);
+  padding: 0;
+  border-radius: 0;
   min-height: 80px;
   width: 100%;
   box-sizing: border-box;

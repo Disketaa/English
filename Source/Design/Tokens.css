@@ -71,7 +71,7 @@
   --Radius-Lg: 1.25rem;
 
   /* Mobile unified constraints */
-  --App-Max-Width: 430px; /* iPhone 14 Pro Max width */
+  --App-Max-Width: 100%;
   --App-Min-Touch: 44px;
   --App-Font-Min-Input: 16px;
 }
