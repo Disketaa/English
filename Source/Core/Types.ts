@@ -1,9 +1,31 @@
+/** One test question. */
+export interface TestQuestion {
+  /** Unique id. */
+  id: string;
+  /** The question text (may contain ___ for blanks). */
+  prompt: string;
+  /** Correct answer (multiple parts separated by " / "). */
+  answer: string;
+  /** Explanation shown after answering. */
+  explanation: string;
+  /** Question type. */
+  type: 'fill' | 'translate';
+}
+
+/** A test attached to a lesson. */
+export interface Test {
+  title: string;
+  questions: TestQuestion[];
+  scoring: { excellent: number; good: number };
+}
+
 /** One renderable piece of a lesson page. */
 export type ContentBlock =
   | { kind: 'Subtitle'; text: string }
   | { kind: 'Text'; text: string }
   | { kind: 'Examples'; items: string[] }
-  | { kind: 'Diagram'; nodes: DiagramNode[]; edges: DiagramEdge[]; start: string };
+  | { kind: 'Diagram'; nodes: DiagramNode[]; edges: DiagramEdge[]; start: string }
+  | { kind: 'Test'; test: Test };
 
 /** A node in a lesson flowchart diagram. */
 export interface DiagramNode {

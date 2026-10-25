@@ -7,6 +7,7 @@ import { Reveal } from '../../Design/Primitives/Reveal';
 import { ExampleList } from '../../Design/Components/ExampleList';
 import { Diagram } from '../../Design/Components/Diagram';
 import { NavTitle } from '../../Design/Components/NavTitle';
+import { TestBlock } from '../../Design/Components/TestBlock';
 import { Button } from '../../Design/Components/Button';
 import { Glyph } from '../../Design/Components/Glyph';
 import { IconButton } from '../../Design/Components/IconButton';
@@ -122,6 +123,13 @@ export function LessonScreen({
                             edges={block.edges}
                             start={block.start}
                           />
+                        </Reveal>
+                      );
+                    }
+                    if (block.kind === 'Test') {
+                      return (
+                        <Reveal key={blockIndex} index={starts[blockIndex]}>
+                          <TestBlock test={block.test} />
                         </Reveal>
                       );
                     }

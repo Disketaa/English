@@ -1,0 +1,114 @@
+.Root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Md);
+  align-items: center;
+  text-align: center;
+  padding: var(--Space-Md);
+}
+
+.Counter {
+  font-size: 0.875rem;
+  color: var(--Color-Text-Secondary);
+  margin: 0;
+}
+
+.Prompt {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+.Input {
+  width: 100%;
+  max-width: 320px;
+  padding: var(--Space-Sm) var(--Space-Md);
+  border: 1px solid var(--Color-Border-Default);
+  border-radius: var(--Radius-Md);
+  font-size: 1rem;
+  text-align: center;
+  background: var(--Color-Surface-Default);
+  color: var(--Color-Text-Primary);
+  font-family: var(--Font-Body);
+}
+
+.Input:disabled {
+  opacity: 0.7;
+}
+
+.Button {
+  padding: var(--Space-Sm) var(--Space-Lg);
+  border: none;
+  border-radius: var(--Radius-Md);
+  background: var(--Color-Action-Primary-Background);
+  color: var(--Color-Action-Primary-Text);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--Font-Body);
+}
+
+.Button:active {
+  transform: scale(0.97);
+}
+
+.Feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Sm);
+  align-items: center;
+  width: 100%;
+}
+
+.Correct {
+  color: var(--Color-Green-Deep);
+  font-weight: 700;
+  margin: 0;
+}
+
+.Wrong {
+  color: #c0392b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.Answer {
+  margin: 0;
+}
+
+.Explanation {
+  font-size: 0.9rem;
+  color: var(--Color-Text-Secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.Result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-Md);
+  align-items: center;
+  text-align: center;
+  padding: var(--Space-Lg);
+}
+
+.ResultTitle {
+  margin: 0;
+  font-family: 'Gabriela', var(--Font-Title);
+  font-size: 1.5rem;
+  color: var(--Color-Text-Primary);
+}
+
+.Score {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--Color-Green-Deep);
+}
+
+.Verdict {
+  font-size: 1rem;
+  color: var(--Color-Text-Secondary);
+  margin: 0;
+}
