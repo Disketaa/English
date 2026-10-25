@@ -26,6 +26,8 @@
   --Color-Action-Success-Text: var(--Color-Cream);
   --Color-Action-Subtle-Background: var(--Color-Cream-Deep);
   --Color-Action-Subtle-Text: var(--Color-Text-Primary);
+  --Color-Action-Highlight-Background: var(--Color-Sage);
+  --Color-Action-Highlight-Text: var(--Color-Text-Primary);
   --Color-Text-Primary: var(--Color-Dark);
   --Color-Text-Secondary: var(--Color-Sage);
   --Color-Border-Default: var(--Color-Sage);
@@ -83,6 +85,11 @@ html {
 
 html::-webkit-scrollbar {
   display: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--Color-Cream-Deep) 50%, transparent);
+  color: var(--Color-Text-Primary);
 }
 
 body {

@@ -1,0 +1,7 @@
+.Root {
+  margin: 0;
+  padding: var(--Space-Md, 1rem);
+  background: color-mix(in srgb, var(--Color-Cream-Deep) 50%, transparent);
+  border-radius: var(--Radius-Md, 0.5rem);
+  color: var(--Color-Text-Default, inherit);
+}

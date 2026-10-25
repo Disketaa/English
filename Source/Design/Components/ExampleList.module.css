@@ -8,11 +8,24 @@
 }
 
 .Item {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   padding: var(--Space-Sm) var(--Space-Md);
-  border-left: 0.1875rem solid var(--Color-Border-Default);
+  background: color-mix(in srgb, var(--Color-Cream-Deep) 50%, transparent);
   border-radius: var(--Radius-Sm);
   color: var(--Color-Text-Primary);
   font-family: var(--Font-Body);
   font-size: 1rem;
   line-height: 1.5;
+}
+
+.Source {
+  font-style: normal;
+}
+
+.Translation {
+  font-style: italic;
+  opacity: 0.85;
+  color: var(--Color-Sage);
 }

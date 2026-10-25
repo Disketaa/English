@@ -1,4 +1,5 @@
 import { Reveal } from '../Primitives/Reveal';
+import { highlightNodes } from '../Primitives/Text';
 import styles from './ExampleList.module.css';
 
 export interface ExampleListProps {
@@ -10,11 +11,17 @@ export interface ExampleListProps {
 export function ExampleList({ items, startIndex = 0 }: ExampleListProps) {
   return (
     <ul class={styles.Root}>
-      {items.map((item, index) => (
-        <Reveal key={item} as="li" index={startIndex + index} class={styles.Item}>
-          {item}
-        </Reveal>
-      ))}
+      {items.map((item, index) => {
+        const [source, translation] = item.split(' — ');
+        return (
+          <Reveal key={item} as="li" index={startIndex + index} class={styles.Item}>
+            <span class={styles.Source}>{highlightNodes(source ?? item)}</span>
+            {translation && (
+              <span class={styles.Translation}>{highlightNodes(translation)}</span>
+            )}
+          </Reveal>
+        );
+      })}
     </ul>
   );
 }
