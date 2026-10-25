@@ -169,6 +169,7 @@ export const articlesLesson: Lesson = {
           kind: 'Examples',
           items: [
             'Birds eat worms. — Птицы едят червей.',
+            'I like **∅** dogs. — Я люблю собак.',
             'I like spiders. — Я люблю пауков.',
           ],
         },
