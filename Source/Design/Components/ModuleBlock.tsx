@@ -9,10 +9,8 @@ import bg5 from '../Graphics/Backgrounds/Abstract5.svg';
 import bg6 from '../Graphics/Backgrounds/Abstract6.svg';
 import bg7 from '../Graphics/Backgrounds/Abstract7.svg';
 import bg8 from '../Graphics/Backgrounds/Abstract8.svg';
-import bg9 from '../Graphics/Backgrounds/Abstract9.svg';
-import bg10 from '../Graphics/Backgrounds/Abstract10.svg';
 
-const BACKGROUNDS = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10];
+const BACKGROUNDS = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
 /** Deterministic hash of a string → non-negative integer. */
 function hashString(s: string): number {
