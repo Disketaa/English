@@ -4,7 +4,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [preact()],
-  base: "/English/",
+  base: "./",
   resolve: {
     alias: {
       "@/": resolve(__dirname, "./Source/") + "/",
