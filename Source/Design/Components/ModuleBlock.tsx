@@ -11,12 +11,8 @@ import bg7 from '../Graphics/Backgrounds/Abstract7.svg';
 import bg8 from '../Graphics/Backgrounds/Abstract8.svg';
 import bg9 from '../Graphics/Backgrounds/Abstract9.svg';
 import bg10 from '../Graphics/Backgrounds/Abstract10.svg';
-import bg11 from '../Graphics/Backgrounds/Abstract11.svg';
-import bg12 from '../Graphics/Backgrounds/Abstract12.svg';
-import bg13 from '../Graphics/Backgrounds/Abstract13.svg';
-import bg14 from '../Graphics/Backgrounds/Abstract14.svg';
 
-const BACKGROUNDS = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13, bg14];
+const BACKGROUNDS = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10];
 
 /** Deterministic hash of a string → non-negative integer. */
 function hashString(s: string): number {
