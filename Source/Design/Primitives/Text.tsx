@@ -14,16 +14,24 @@ function parseHighlights(
   lineIndex: number
 ): Array<string | ReturnType<typeof Highlight>> {
   const nodes: Array<string | ReturnType<typeof Highlight>> = [];
-  const regex = /\*\*([^*]*)\*\*|\*([^*]*)\*/g;
+  const regex = new RegExp('\\*\\*([^*]*)\\*\\*|\\*([^*]*)\\*|_([^_]*)_', 'g');
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = regex.exec(text)) !== null) {
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
     }
-    nodes.push(
-      <Highlight key={`${lineIndex}-${match.index}`}>{match[1] ?? match[2]}</Highlight>
-    );
+    if (match[1] !== undefined) {
+      nodes.push(<Highlight key={`${lineIndex}-${match.index}`}>{match[1]}</Highlight>);
+    } else if (match[2] !== undefined) {
+      nodes.push(<em key={`${lineIndex}-${match.index}`}>{match[2]}</em>);
+    } else if (match[3] !== undefined) {
+      nodes.push(
+        <span key={`${lineIndex}-${match.index}`} class={styles.Underline}>
+          {match[3]}
+        </span>
+      );
+    }
     lastIndex = regex.lastIndex;
   }
   if (lastIndex < text.length) {

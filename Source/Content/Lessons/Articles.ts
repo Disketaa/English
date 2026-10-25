@@ -12,7 +12,7 @@ export const articlesLesson: Lesson = {
         { kind: 'Subtitle', text: 'Что такое артикль?' },
         {
           kind: 'Text',
-          text: 'Артикль — это маленькое слово перед существительным. В русском языке артиклей нет, а в английском они есть: и их очень много...',
+          text: 'Артикль — это маленькое слово перед _существительным_. В русском языке артиклей нет, а в английском они есть: и их очень много...',
         },
         {
           kind: 'Text',
@@ -21,10 +21,10 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'I have **a** dog. — У меня есть собака.',
-            'She eats **an** apple. — Она ест яблоко.',
-            '**The** dog is big. — Эта собака большая.',
-            'I like **ㅤ** dogs. — Я люблю собак.',
+            'I have **a** _dog_. — У меня есть собака.',
+            'She eats **an** _apple_. — Она ест яблоко.',
+            '**The** _dog_ is big. — Эта собака большая.',
+            'I like **ㅤ** _dogs_. — Я люблю собак.',
           ],
         },
         { kind: 'Subtitle', text: 'Главный вопрос' },
@@ -54,7 +54,7 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'I saw **a** cat. **The** cat was black. — Я увидел кошку. Кошка была чёрной.',
+            'I saw **a** _cat_. **The** _cat_ was black. — Я увидел кошку. Кошка была чёрной.',
           ],
         },
         {
@@ -64,8 +64,8 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'Please close **the** door. — Закрой, пожалуйста, дверь.',
-            'Where is **the** car key? — Где ключ от машины?',
+            'Please close **the** _door_. — Закрой, пожалуйста, дверь.',
+            'Where is **the** car _key_? — Где ключ от машины?',
           ],
         },
         {
@@ -75,8 +75,8 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**The** sun is hot. — Солнце горячее.',
-            '**The** moon is bright tonight. — Луна сегодня яркая.',
+            '**The** _sun_ is hot. — Солнце горячее.',
+            '**The** _moon_ is bright tonight. — Луна сегодня яркая.',
           ],
         },
         {
@@ -129,7 +129,7 @@ export const articlesLesson: Lesson = {
         },
         {
           kind: 'Examples',
-          items: ['I saw **a** good film yesterday. — Вчера я посмотрел хороший фильм.'],
+          items: ['I saw **a** good _film_ yesterday. — Вчера я посмотрел хороший фильм.'],
         },
         {
           kind: 'Text',
@@ -145,7 +145,7 @@ export const articlesLesson: Lesson = {
         },
         {
           kind: 'Examples',
-          items: ['Do you want **a** drink? — Хочешь напиток?'],
+          items: ['Do you want **a** _drink_? — Хочешь напиток?'],
         },
       ],
     },
@@ -165,8 +165,8 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** Birds eat **ㅤ** worms. — Птицы едят червей.',
-            'I like **ㅤ** dogs. — Я люблю собак.',
+            '**ㅤ** _Birds_ eat **ㅤ** _worms_. — Птицы едят червей.',
+            'I like **ㅤ** _dogs_. — Я люблю собак.',
           ],
         },
         {
@@ -176,16 +176,16 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** Water freezes at 0°C. — Вода замерзает при 0 °C.',
-            '**ㅤ** Music makes me happy. — Музыка делает меня счастливым.',
+            '**ㅤ** _Water_ freezes at 0°C. — Вода замерзает при 0 °C.',
+            '**ㅤ** _Music_ makes me happy. — Музыка делает меня счастливым.',
           ],
         },
         { kind: 'Subtitle', text: 'Сравните' },
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** Children need sleep. — Детям нужен сон. (все дети вообще)',
-            '**The** children are asleep. — Дети спят. (конкретные дети)',
+            '**ㅤ** _Children_ need sleep. — Детям нужен сон. (все дети вообще)',
+            '**The** _children_ are asleep. — Дети спят. (конкретные дети)',
           ],
         },
       ],
@@ -201,10 +201,10 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**Have** **ㅤ** breakfast. — Завтракать',
-            'I speak **ㅤ** English. — Я говорю по-английски.',
-            'She plays **ㅤ** tennis. — Она играет в теннис.',
-            'By **ㅤ** train. — На поезде.',
+            '**Have** **ㅤ** _breakfast_. — Завтракать',
+            'I speak **ㅤ** _English_. — Я говорю по-английски.',
+            'She plays **ㅤ** _tennis_. — Она играет в теннис.',
+            'By **ㅤ** _train_. — На поезде.',
           ],
         },
         { kind: 'Subtitle', text: 'Места: school, work, bed' },
@@ -215,8 +215,8 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'I go to **ㅤ** school every day. — Я хожу в школу каждый день. (учиться)',
-            'I went to **the** school to meet a teacher. — Я ходил в школу, чтобы встретиться с учителем. (конкретное здание)',
+            'I go to **ㅤ** _school_ every day. — Я хожу в школу каждый день. (учиться)',
+            'I went to **the** _school_ to meet **a** _teacher_. — Я ходил в школу, чтобы встретиться с учителем. (конкретное здание) \n\n(из контекста непонятно с каким учителем именно)',
           ],
         },
         { kind: 'Subtitle', text: 'Слова, где всегда **the**:' },
@@ -290,9 +290,9 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'I have **a** cat. — У меня есть кошка.',
-            '**The** cat is very cute. — Эта кошка очень милая.',
-            '**ㅤ** Cats are cute. — Кошки милые (все кошки вообще).',
+            'I have **a** _cat_. — У меня есть кошка.',
+            '**The** _cat_ is very cute. — Эта кошка очень милая.',
+            '**ㅤ** _Cats_ are cute. — Кошки милые (все кошки вообще).',
           ],
         },
         {

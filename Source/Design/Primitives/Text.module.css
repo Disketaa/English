@@ -52,8 +52,9 @@
   line-height: 1.6;
 }
 
-.VariantCaption {
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  color: var(--Color-Text-Secondary);
+.Underline {
+  text-decoration: underline;
+  text-decoration-color: var(--Color-Blue);
+  text-underline-offset: 2px;
+  color: inherit;
 }
