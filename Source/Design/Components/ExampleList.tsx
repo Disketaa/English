@@ -43,7 +43,7 @@ function ExampleItem({ source, translation, index }: ExampleItemProps) {
         onClick={() => setRevealed((value) => !value)}
       >
         <span class={styles.Source}>{highlightNodes(source)}</span>
-        <span class={styles.Translation}>
+        <span class={`${styles.Translation} ${revealed ? styles.Revealed : ''}`}>
           {revealed && translation ? highlightNodes(translation) : 'Нажмите, чтобы увидеть перевод'}
         </span>
       </button>
