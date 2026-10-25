@@ -87,7 +87,7 @@ export function TestBlock({ test }: TestBlockProps) {
   }
 
   // Ensure values array has right length
-  const vals = values.length === blanks ? values : Array(blanks).fill('');
+  const vals = values.length === blanks ? values : Array.from({ length: blanks }, (_, i) => values[i] ?? '');
 
   return (
     <div class={styles.Root}>
@@ -96,7 +96,7 @@ export function TestBlock({ test }: TestBlockProps) {
       </p>
       <div class={styles.Prompt}>
         {parts.map((part, i) => (
-          <>
+          <span key={i} class={styles.Part}>
             <span>{highlightNodes(part)}</span>
             {i < blanks && (
               <input
@@ -115,7 +115,7 @@ export function TestBlock({ test }: TestBlockProps) {
                 disabled={submitted}
               />
             )}
-          </>
+          </span>
         ))}
       </div>
       {!submitted && (
