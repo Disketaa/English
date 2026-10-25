@@ -7,28 +7,47 @@ export interface TestBlockProps {
   test: Test;
 }
 
+function splitBlanks(prompt: string): string[] {
+  return prompt.split('___');
+}
+
+function splitAnswers(answer: string): string[] {
+  return answer.split('/').map((s) => s.trim());
+}
+
+function normalize(s: string): string {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
 export function TestBlock({ test }: TestBlockProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState('');
+  const [values, setValues] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
 
   const question = test.questions[currentIndex];
-  const isCorrect =
-    submitted &&
-    normalize(userAnswer) === normalize(question.answer);
+  const parts = splitBlanks(question.prompt);
+  const blanks = parts.length - 1;
+  const expected = splitAnswers(question.answer);
 
-  function normalize(s: string): string {
-    return s.trim().toLowerCase().replace(/\s+/g, ' ');
+  // Initialize values when question changes
+  if (values.length !== blanks && !submitted) {
+    // reset
   }
+
+  const allCorrect =
+    submitted &&
+    values.length === expected.length &&
+    values.every((v, i) => normalize(v) === normalize(expected[i] ?? ''));
 
   function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
-    if (normalize(userAnswer) === normalize(question.answer)) {
-      setScore((s) => s + 1);
-    }
+    const correct =
+      values.length === expected.length &&
+      values.every((v, i) => normalize(v) === normalize(expected[i] ?? ''));
+    if (correct) setScore((s) => s + 1);
   }
 
   function handleNext() {
@@ -36,9 +55,18 @@ export function TestBlock({ test }: TestBlockProps) {
       setFinished(true);
     } else {
       setCurrentIndex((i) => i + 1);
-      setUserAnswer('');
+      setValues([]);
       setSubmitted(false);
     }
+  }
+
+  function setValue(i: number, v: string) {
+    setValues((prev) => {
+      const next = [...prev];
+      while (next.length <= i) next.push('');
+      next[i] = v;
+      return next;
+    });
   }
 
   if (finished) {
@@ -58,28 +86,38 @@ export function TestBlock({ test }: TestBlockProps) {
     );
   }
 
+  // Ensure values array has right length
+  const vals = values.length === blanks ? values : Array(blanks).fill('');
+
   return (
     <div class={styles.Root}>
       <p class={styles.Counter}>
         Вопрос {currentIndex + 1} из {test.questions.length}
       </p>
-      <p class={styles.Prompt}>{highlightNodes(question.prompt)}</p>
-      <input
-        class={styles.Input}
-        type="text"
-        value={userAnswer}
-        onInput={(e) => {
-          const target = e.currentTarget;
-          if (target instanceof HTMLInputElement) {
-            setUserAnswer(target.value);
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') handleSubmit();
-        }}
-        disabled={submitted}
-        placeholder="Ваш ответ"
-      />
+      <div class={styles.Prompt}>
+        {parts.map((part, i) => (
+          <>
+            <span>{highlightNodes(part)}</span>
+            {i < blanks && (
+              <input
+                class={`${styles.Blank} ${submitted ? (normalize(vals[i]) === normalize(expected[i] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
+                type="text"
+                value={vals[i]}
+                onInput={(e) => {
+                  const target = e.currentTarget;
+                  if (target instanceof HTMLInputElement) {
+                    setValue(i, target.value);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSubmit();
+                }}
+                disabled={submitted}
+              />
+            )}
+          </>
+        ))}
+      </div>
       {!submitted && (
         <button class={styles.Button} onClick={handleSubmit}>
           Проверить
@@ -87,10 +125,10 @@ export function TestBlock({ test }: TestBlockProps) {
       )}
       {submitted && (
         <div class={styles.Feedback}>
-          <p class={isCorrect ? styles.Correct : styles.Wrong}>
-            {isCorrect ? '✓ Верно!' : '✗ Неверно'}
+          <p class={allCorrect ? styles.Correct : styles.Wrong}>
+            {allCorrect ? '✓ Верно!' : '✗ Неверно'}
           </p>
-          {!isCorrect && (
+          {!allCorrect && (
             <p class={styles.Answer}>
               Правильный ответ: <strong>{question.answer}</strong>
             </p>
