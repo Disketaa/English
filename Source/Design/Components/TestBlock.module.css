@@ -44,6 +44,7 @@
   color: var(--Color-Text-Primary);
   font-family: var(--Font-Body);
   outline: none;
+  field-sizing: content;
 }
 
 .Blank:focus {
