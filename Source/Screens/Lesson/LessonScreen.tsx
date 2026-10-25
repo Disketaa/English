@@ -44,6 +44,7 @@ export function LessonScreen({
 }: LessonScreenProps) {
   const [currentPage, setCurrentPage] = useState(page);
   const [visiblePage, setVisiblePage] = useState(page);
+  const [testCompleted, setTestCompleted] = useState(false);
   const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pendingScroll = useRef<number | null>(null);
 
@@ -96,7 +97,7 @@ export function LessonScreen({
             return (
               <div
                 key={pageIndex}
-                class={`${styles.Page} ${pageIndex > 0 ? styles.PageSeparated : ''}`}
+                class={`${styles.Page} ${pageIndex > 0 ? styles.PageSeparated : ''} ${pageContent.nav === 'Тест' ? styles.PageTest : ''}`}
                 ref={(element) => {
                   pageRefs.current[pageIndex] = element;
                 }}
@@ -129,7 +130,7 @@ export function LessonScreen({
                     if (block.kind === 'Test') {
                       return (
                         <Reveal key={blockIndex} index={starts[blockIndex]}>
-                          <TestBlock test={block.test} />
+                          <TestBlock test={block.test} onComplete={() => setTestCompleted(true)} onFinish={onBack} />
                         </Reveal>
                       );
                     }
@@ -142,9 +143,10 @@ export function LessonScreen({
                     );
                   })}
                 </Stack>
-                {isFrontier && (
+                {isFrontier && !pageContent.blocks.some((b) => b.kind === 'Test') && (
                   <Button
                     variant={isLast ? 'Success' : 'Subtle'}
+                    disabled={isLast && !testCompleted}
                     onClick={
                       isLast
                         ? onBack

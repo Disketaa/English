@@ -22,7 +22,21 @@
   gap: var(--Space-Md);
 }
 
-.PageSeparated {
-  border-top: 1px solid var(--Color-Border-Subtle);
-  padding-top: var(--Space-Xl);
+.PageTest {
+  position: relative;
+  background: transparent;
+  border-radius: 0;
+  padding: var(--Space-Md);
+}
+
+.PageTest::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--Space-Md));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  bottom: calc(-1 * var(--Space-Md));
+  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
+  z-index: -1;
 }

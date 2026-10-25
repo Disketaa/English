@@ -1,5 +1,5 @@
 .Root {
-  display: inline;
+  display: inline-block;
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   color: var(--Color-Action-Highlight-Text);
   font-weight: 400;

@@ -3,8 +3,8 @@ import { Lesson, Test } from '../../Core/Types';
 export const articlesTest: Test = {
   title: 'Тест по теме «Артикли»',
   questions: [
-    { id: '1', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a / The', explanation: 'Собака упоминается впервые, поэтому a. Во втором предложении это уже известная собака, поэтому the.', type: 'fill' },
-    { id: '2', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово apple начинается с гласного звука, поэтому an.', type: 'fill' },
+    { id: '1', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a, the', explanation: 'Собака упоминается впервые, поэтому **a**. Во втором предложении это уже известная собака, поэтому **the**.', type: 'fill' },
+    { id: '2', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово apple начинается с гласного звука, поэтому **an**.', type: 'fill' },
     { id: '3', prompt: 'He is ___ doctor.', answer: 'a', explanation: 'Профессия называется с a/an. Doctor начинается с согласного звука.', type: 'fill' },
     { id: '4', prompt: 'Please close ___ door. (вы оба видите, какую дверь)', answer: 'the', explanation: 'Из ситуации ясно, о какой двери речь.', type: 'fill' },
     { id: '5', prompt: '___ sun is hot.', answer: 'The', explanation: 'Солнце одно на весь мир.', type: 'fill' },
@@ -335,7 +335,6 @@ export const articlesLesson: Lesson = {
     {
       nav: 'Тест',
       blocks: [
-        { kind: 'Subtitle', text: 'Тест по теме «Артикли»' },
         { kind: 'Test', test: articlesTest },
       ],
     },

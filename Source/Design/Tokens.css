@@ -89,7 +89,7 @@ html::-webkit-scrollbar {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--Color-Cream-Deep) 50%, transparent);
+  background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
   color: var(--Color-Text-Primary);
 }
 
