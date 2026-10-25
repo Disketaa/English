@@ -71,7 +71,7 @@
   --Radius-Lg: 1.25rem;
 
   /* Mobile unified constraints */
-  --App-Max-Width: 100%;
+  --App-Max-Width: 340px;
   --App-Min-Touch: 44px;
   --App-Font-Min-Input: 16px;
 }
