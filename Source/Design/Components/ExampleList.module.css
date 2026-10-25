@@ -32,7 +32,9 @@
   cursor: pointer;
   color: inherit;
   font: inherit;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .Toggle:active {

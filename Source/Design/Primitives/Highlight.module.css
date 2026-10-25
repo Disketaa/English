@@ -2,7 +2,8 @@
   display: inline;
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   color: var(--Color-Action-Highlight-Text);
-  font-weight: 700;
-  border-radius: var(--Radius-Sm);
-  padding: 0 var(--Space-Xs);
+  font-weight: 400;
+  font-style: italic;
+  border-radius: calc(var(--Radius-Sm) / 2);
+  padding: 0;
 }

@@ -9,10 +9,9 @@ export interface TextProps {
   children: ComponentChildren;
 }
 
-/** Split a text string into plain strings and <Highlight> elements using *markdown* markers. */
-export function highlightNodes(text: string): Array<string | ReturnType<typeof Highlight>> {
+function parseHighlights(text: string): Array<string | ReturnType<typeof Highlight>> {
   const nodes: Array<string | ReturnType<typeof Highlight>> = [];
-  const regex = /\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  const regex = /\*\*([^*]*)\*\*|\*([^*]*)\*/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = regex.exec(text)) !== null) {
@@ -25,6 +24,17 @@ export function highlightNodes(text: string): Array<string | ReturnType<typeof H
   if (lastIndex < text.length) {
     nodes.push(text.slice(lastIndex));
   }
+  return nodes;
+}
+
+/** Split a text string into plain strings and <Highlight> elements using *markdown* markers. */
+export function highlightNodes(text: string): Array<unknown> {
+  const nodes: Array<unknown> = [];
+  const lines = text.split('\n');
+  lines.forEach((line, li) => {
+    nodes.push(...parseHighlights(line));
+    if (li < lines.length - 1) nodes.push(<br key={`br-${li}`} />);
+  });
   return nodes;
 }
 

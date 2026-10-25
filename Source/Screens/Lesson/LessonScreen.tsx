@@ -101,7 +101,7 @@ export function LessonScreen({
                 <Reveal index={0}>
                   <Text variant="Title">{pageContent.nav}</Text>
                 </Reveal>
-                <Stack gap="Md" padded={false}>
+                  <Stack gap="Lg" padded={false}>
                   {pageContent.blocks.map((block, blockIndex) => {
                     if (block.kind === 'Examples') {
                       return (
