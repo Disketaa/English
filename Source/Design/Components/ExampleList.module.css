@@ -20,8 +20,24 @@
   line-height: 1.5;
 }
 
-.Source {
-  font-style: normal;
+.Toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.Toggle:active {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 
 .Translation {
