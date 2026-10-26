@@ -137,6 +137,8 @@ export function LessonScreen({
                           key={blockIndex}
                           items={block.items}
                           startIndex={starts[blockIndex]}
+                          lessonId={lesson.id}
+                          pageIndex={pageIndex}
                         />
                       );
                     }
