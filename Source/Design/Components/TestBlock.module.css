@@ -162,6 +162,7 @@
 
 .Answer {
   margin: 0;
+  mix-blend-mode: multiply;
 }
 
 .ExplanationToggle {
@@ -176,6 +177,7 @@
   font-size: 0.9rem;
   text-align: left;
   width: 100%;
+  mix-blend-mode: multiply;
   transition:
     transform 0.15s ease,
     opacity 0.15s ease;
