@@ -40,3 +40,11 @@
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   z-index: -1;
 }
+
+.PageTestPass::before {
+  background: color-mix(in srgb, var(--Color-Green-Deep) 25%, transparent);
+}
+
+.PageTestFail::before {
+  background: color-mix(in srgb, #c0392b 25%, transparent);
+}

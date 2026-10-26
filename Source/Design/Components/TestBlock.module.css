@@ -1,5 +1,5 @@
 .Container {
-  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
+  background: transparent;
   border-radius: var(--Radius-Md);
   padding: 0;
   transition: background 0.4s ease;

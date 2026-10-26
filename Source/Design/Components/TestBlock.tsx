@@ -6,7 +6,7 @@ import { Test } from '../../Core/Types';
 
 export interface TestBlockProps {
   test: Test;
-  onComplete?: () => void;
+  onComplete?: (passed: boolean) => void;
   onFinish?: () => void;
   onProgress?: (current: number, total: number) => void;
 }
@@ -98,7 +98,7 @@ export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockP
   function handleNext() {
     if (currentIndex + 1 >= test.questions.length) {
       setFinished(true);
-      if (onComplete) onComplete();
+      if (onComplete) onComplete(score >= test.scoring.good);
     } else {
       setCurrentIndex((i) => i + 1);
       setValues([]);
@@ -123,9 +123,7 @@ export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockP
     if (score >= test.scoring.excellent) verdict = 'Отлично!';
     else if (score >= test.scoring.good) verdict = 'Хорошо, повторите «Исключения».';
     return (
-      <div
-        class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}
-      >
+      <div class={styles.Container}>
         <div class={styles.Result}>
           <h2 class={styles.ResultTitle}>Результат</h2>
           <p class={styles.Score}>
