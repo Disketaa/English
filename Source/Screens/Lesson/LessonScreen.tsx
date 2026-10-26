@@ -46,6 +46,7 @@ export function LessonScreen({
   const [visiblePage, setVisiblePage] = useState(page);
   const [testCompleted, setTestCompleted] = useState(false);
   const [testAnswered, setTestAnswered] = useState<boolean | null>(null);
+  const [testResult, setTestResult] = useState<boolean | null>(null);
   const answerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [testProgress, setTestProgress] = useState<{ current: number; total: number } | null>(
     null
@@ -111,7 +112,7 @@ export function LessonScreen({
             return (
               <div
                 key={pageIndex}
-                class={`${styles.Page} ${pageIndex > 0 ? styles.PageSeparated : ''} ${pageContent.nav === 'Тест' ? styles.PageTest : ''} ${pageContent.nav === 'Тест' && testAnswered === true ? styles.PageTestPass : ''} ${pageContent.nav === 'Тест' && testAnswered === false ? styles.PageTestFail : ''}`}
+                class={`${styles.Page} ${pageIndex > 0 ? styles.PageSeparated : ''} ${pageContent.nav === 'Тест' ? styles.PageTest : ''} ${pageContent.nav === 'Тест' && (testResult !== null ? testResult : testAnswered) === true ? styles.PageTestPass : ''} ${pageContent.nav === 'Тест' && (testResult !== null ? testResult : testAnswered) === false ? styles.PageTestFail : ''}`}
                 ref={(element) => {
                   pageRefs.current[pageIndex] = element;
                 }}
@@ -155,8 +156,9 @@ export function LessonScreen({
                         <Reveal key={blockIndex} index={starts[blockIndex]}>
                           <TestBlock
                             test={block.test}
-                            onComplete={() => {
+                            onComplete={(passed) => {
                               setTestCompleted(true);
+                              setTestResult(passed);
                             }}
                             onFinish={onBack}
                             onProgress={handleTestProgress}

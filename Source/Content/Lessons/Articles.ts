@@ -50,7 +50,8 @@ export const articlesTest: Test = {
       id: '7',
       prompt: '___ water freezes at 0°C.',
       answer: '—',
-      explanation: 'Water неисчисляемое, и речь о воде в целом. Нужен нулевой артикль.',
+      explanation:
+        '**Water** **неисчисляемое**, и речь о воде **в целом**. Нужен **нулевой артикль**.',
       type: 'fill',
     },
     {
