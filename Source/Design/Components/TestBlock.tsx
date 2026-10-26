@@ -9,6 +9,7 @@ export interface TestBlockProps {
   onComplete?: (passed: boolean) => void;
   onFinish?: () => void;
   onProgress?: (current: number, total: number) => void;
+  onAnswered?: (correct: boolean | null) => void;
 }
 
 function splitBlanks(prompt: string): string[] {
@@ -62,7 +63,13 @@ function isCloseEnough(user: string, expected: string): boolean {
   return levenshtein(nu, ne) <= maxDist;
 }
 
-export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockProps) {
+export function TestBlock({
+  test,
+  onComplete,
+  onFinish,
+  onProgress,
+  onAnswered,
+}: TestBlockProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [values, setValues] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
@@ -93,6 +100,7 @@ export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockP
       currentVals.length === expected.length &&
       currentVals.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
     if (correct) setScore((s) => s + 1);
+    if (onAnswered) onAnswered(correct);
   }
 
   function handleNext() {
@@ -104,6 +112,7 @@ export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockP
       setValues([]);
       setSubmitted(false);
       setRevealed(false);
+      if (onAnswered) onAnswered(null);
     }
   }
 

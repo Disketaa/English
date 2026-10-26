@@ -121,6 +121,7 @@
   flex: 1;
   background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
   color: var(--Color-Dark);
+  mix-blend-mode: multiply;
 }
 
 .Feedback {
