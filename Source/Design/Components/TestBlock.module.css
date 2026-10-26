@@ -92,8 +92,9 @@
 }
 
 .Blank::placeholder {
-  color: var(--Color-Sage);
-  opacity: 1;
+  color: var(--Color-Dark);
+  opacity: 0.25;
+  mix-blend-mode: multiply;
 }
 
 .BlankCorrect {
