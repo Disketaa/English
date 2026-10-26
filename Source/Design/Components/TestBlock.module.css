@@ -61,7 +61,7 @@
   border-radius: calc(var(--Radius-Sm) / 2);
   font-size: 1rem;
   text-align: center;
-  background: var(--Color-Cream-Deep);
+  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   color: var(--Color-Text-Primary);
   font-family: var(--Font-Body);
   font-style: italic;
