@@ -1,11 +1,20 @@
 .Container {
-  background: transparent;
+  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   border-radius: var(--Radius-Md);
   padding: 0;
   transition: background 0.4s ease;
   min-height: calc(var(--Space-Xl) * 8);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ContainerCorrect {
+  background: color-mix(in srgb, var(--Color-Green-Deep) 25%, transparent);
+}
+
+.ContainerWrong {
+  background: color-mix(in srgb, #c0392b 25%, transparent);
 }
 
 .Root {
@@ -60,6 +69,7 @@
   outline: none;
   field-sizing: content;
   line-height: 0.8;
+  box-sizing: border-box;
 }
 
 .Blank:focus {
@@ -76,8 +86,9 @@
 
 .BlankCorrect {
   border-bottom: none;
-  color: var(--Color-Green-Deep);
+  color: var(--Color-Sage);
   border-radius: calc(var(--Radius-Sm) / 2);
+  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
 }
 
 .BlankWrong {
