@@ -147,9 +147,7 @@ export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockP
 
   // Ensure values array has right length
   return (
-    <div
-      class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}
-    >
+    <div class={styles.Container}>
       <div class={styles.Root}>
         <div class={styles.Prompt}>
           {blanks > 0 ? (

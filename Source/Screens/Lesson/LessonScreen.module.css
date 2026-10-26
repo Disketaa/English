@@ -42,9 +42,9 @@
 }
 
 .PageTestPass::before {
-  background: color-mix(in srgb, var(--Color-Green-Deep) 25%, transparent);
+  background: color-mix(in srgb, var(--Color-Green-Deep) 25%, transparent) !important;
 }
 
 .PageTestFail::before {
-  background: color-mix(in srgb, #c0392b 25%, transparent);
+  background: color-mix(in srgb, #c0392b 25%, transparent) !important;
 }
