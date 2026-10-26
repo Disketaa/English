@@ -46,6 +46,7 @@ export function LessonScreen({
   const [visiblePage, setVisiblePage] = useState(page);
   const [testCompleted, setTestCompleted] = useState(false);
   const [testAnswered, setTestAnswered] = useState<boolean | null>(null);
+  const answerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [testProgress, setTestProgress] = useState<{ current: number; total: number } | null>(
     null
   );
@@ -78,6 +79,12 @@ export function LessonScreen({
     pendingScroll.current = null;
     pageRefs.current[target]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [visiblePage]);
+
+  useEffect(() => {
+    return () => {
+      if (answerTimer.current) clearTimeout(answerTimer.current);
+    };
+  }, []);
 
   return (
     <div class={styles.Root}>
@@ -153,7 +160,16 @@ export function LessonScreen({
                             }}
                             onFinish={onBack}
                             onProgress={handleTestProgress}
-                            onAnswered={setTestAnswered}
+                            onAnswered={(correct) => {
+                              if (answerTimer.current) clearTimeout(answerTimer.current);
+                              setTestAnswered(correct);
+                              if (correct !== null) {
+                                answerTimer.current = setTimeout(() => {
+                                  setTestAnswered(null);
+                                  answerTimer.current = null;
+                                }, 800);
+                              }
+                            }}
                           />
                         </Reveal>
                       );
