@@ -1,9 +1,10 @@
 .Root {
   display: inline-block;
-  background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
+  min-width: 0.75rem;
+  background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
   color: var(--Color-Action-Highlight-Text);
   font-weight: 400;
   font-style: italic;
   border-radius: calc(var(--Radius-Sm) / 2);
-  padding: 0;
+  padding: 0 0.125rem;
 }

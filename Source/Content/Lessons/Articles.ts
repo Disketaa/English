@@ -3,29 +3,29 @@ import { Lesson, Test } from '../../Core/Types';
 export const articlesTest: Test = {
   title: 'Тест по теме «Артикли»',
   questions: [
-    { id: '1', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a, the', explanation: 'Собака упоминается впервые, поэтому **a**. Во втором предложении это уже известная собака, поэтому **the**.', type: 'fill' },
-    { id: '2', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово apple начинается с гласного звука, поэтому **an**.', type: 'fill' },
-    { id: '3', prompt: 'He is ___ doctor.', answer: 'a', explanation: 'Профессия называется с a/an. Doctor начинается с согласного звука.', type: 'fill' },
-    { id: '4', prompt: 'Please close ___ door. (вы оба видите, какую дверь)', answer: 'the', explanation: 'Из ситуации ясно, о какой двери речь.', type: 'fill' },
+    { id: '1', prompt: 'She eats ___ apple every morning.', answer: 'an', explanation: 'Слово _apple_ начинается с гласного звука, поэтому **an**, вместо **a**.', type: 'fill' },
+    { id: '2', prompt: 'I have ___ dog. ___ dog is big.', answer: 'a, the', explanation: 'Собака упоминается впервые, поэтому **a**. Во втором предложении это уже известная собака, поэтому **the**.', type: 'fill' },
+    { id: '3', prompt: 'He is ___ doctor.', answer: 'a', explanation: 'Профессия называется с **a**/**an**.', type: 'fill' },
+    { id: '4', prompt: 'Please close ___ door. **(конкретную)**', answer: 'the', explanation: 'Из ситуации ясно, о какой двери речь.', type: 'fill' },
     { id: '5', prompt: '___ sun is hot.', answer: 'The', explanation: 'Солнце одно на весь мир.', type: 'fill' },
-    { id: '6', prompt: 'I like ___ dogs. (собак вообще)', answer: '—', explanation: 'Говорим о собаках вообще, во множественном числе. Нужен нулевой артикль.', type: 'fill' },
+    { id: '6', prompt: 'I like ___ dogs. **(в целом)**', answer: '—', explanation: 'Говорим о собаках вообще, во множественном числе. Нужен нулевой артикль.', type: 'fill' },
     { id: '7', prompt: '___ water freezes at 0°C.', answer: '—', explanation: 'Water неисчисляемое, и речь о воде в целом. Нужен нулевой артикль.', type: 'fill' },
-    { id: '8', prompt: 'It takes me ___ hour to get home.', answer: 'an', explanation: 'Буква h в hour не произносится, слово начинается с гласного звука.', type: 'fill' },
-    { id: '9', prompt: 'He studies at ___ university.', answer: 'a', explanation: 'University начинается со звука «ю», это согласный звук. Здесь важен звук, а не буква.', type: 'fill' },
-    { id: '10', prompt: 'Let\'s have ___ breakfast.', answer: '—', explanation: 'Приёмы пищи употребляются без артикля.', type: 'fill' },
-    { id: '11', prompt: 'I speak ___ English.', answer: '—', explanation: 'Языки употребляются без артикля.', type: 'fill' },
-    { id: '12', prompt: 'She plays ___ tennis.', answer: '—', explanation: 'Виды спорта употребляются без артикля.', type: 'fill' },
-    { id: '13', prompt: 'He plays ___ piano.', answer: 'the', explanation: 'Музыкальные инструменты употребляются с the.', type: 'fill' },
-    { id: '14', prompt: 'We travel by ___ train.', answer: '—', explanation: 'Фраза by + транспорт пишется без артикля (by train, by bus).', type: 'fill' },
-    { id: '15', prompt: 'I go to ___ school every day. (чтобы учиться)', answer: '—', explanation: 'Идём в школу по назначению, то есть учиться. Артикля нет.', type: 'fill' },
-    { id: '16', prompt: 'I went to ___ school to meet ___ teacher. (в здание школы; учитель «какой-то»)', answer: 'the / a', explanation: 'Здесь конкретное здание, поэтому the school. Учитель «какой-то», из контекста непонятно какой, поэтому a teacher.', type: 'fill' },
-    { id: '17', prompt: '___ Pacific Ocean is huge.', answer: 'The', explanation: 'Океаны, моря и реки употребляются с the.', type: 'fill' },
-    { id: '18', prompt: 'It\'s ___ best day of my life.', answer: 'the', explanation: 'Превосходная степень («самый-самый») всегда с the.', type: 'fill' },
-    { id: '19', prompt: '___ children need sleep. (все дети вообще)', answer: '—', explanation: 'Дети вообще, множественное число, нулевой артикль.', type: 'fill' },
-    { id: '20', prompt: '___ children are asleep. (конкретные дети)', answer: 'The', explanation: 'Это конкретные дети, о которых знают оба собеседника.', type: 'fill' },
-    { id: '21', prompt: 'Я вижу кошку. Кошка чёрная.', answer: 'I see a cat. The cat is black.', explanation: 'Первое упоминание даёт a, повторное даёт the.', type: 'translate' },
-    { id: '22', prompt: 'Она архитектор.', answer: 'She is an architect.', explanation: 'Профессия берёт a/an. Architect начинается с гласного звука, поэтому an.', type: 'translate' },
-    { id: '23', prompt: 'Луна сегодня яркая.', answer: 'The moon is bright tonight.', explanation: 'Луна одна, поэтому the.', type: 'translate' },
+    { id: '8', prompt: 'It takes me ___ hour to get home.', answer: 'an', explanation: 'Буква **h** в **hour** не произносится, поэтому слово начинается с гласного звука.', type: 'fill' },
+    { id: '9', prompt: 'He studies at ___ university.', answer: 'a', explanation: '**University** начинается со звука **u**, это согласный звук. Здесь важен звук, а не буква.', type: 'fill' },
+    { id: '10', prompt: 'Let\'s have ___ breakfast.', answer: '—', explanation: 'Приёмы пищи употребляются **без артикля**.', type: 'fill' },
+    { id: '11', prompt: 'I speak ___ English.', answer: '—', explanation: 'Языки употребляются **без артикля**.', type: 'fill' },
+    { id: '12', prompt: 'She plays ___ tennis.', answer: '—', explanation: 'Виды спорта употребляются **без артикля**.', type: 'fill' },
+    { id: '13', prompt: 'He plays ___ piano.', answer: 'the', explanation: 'Музыкальные инструменты употребляются с **the**.', type: 'fill' },
+    { id: '14', prompt: 'We travel by ___ train.', answer: '—', explanation: 'Фраза **by + транспорт** пишется **без артикля**.', type: 'fill' },
+    { id: '15', prompt: 'I go to ___ school every day. **(учиться)**', answer: '—', explanation: 'Идём в школу **по назначению**, то есть учиться. **Артикля нет**.', type: 'fill' },
+    { id: '16', prompt: 'I went to ___ school to meet a teacher.', answer: 'the', explanation: 'Здесь **конкретное** здание школы, поэтому **the school**. Учитель **«какой-то»**, из контекста непонятно какой, поэтому **a teacher**.', type: 'fill' },
+    { id: '17', prompt: '___ Pacific Ocean is huge.', answer: 'The', explanation: 'Океаны, моря и реки употребляются с **the**.', type: 'fill' },
+    { id: '18', prompt: 'It\'s ___ best day of my life.', answer: 'the', explanation: 'Превосходная степень **(«самый-самый»)** всегда с **the**.', type: 'fill' },
+    { id: '19', prompt: '___ children need sleep. **(в целом)**', answer: '—', explanation: 'Дети **вообще**, множественное число, **нулевой артикль**.', type: 'fill' },
+    { id: '20', prompt: '___ children are asleep. **(конкретные)**', answer: 'the', explanation: 'Это **конкретные дети**, о которых знают оба собеседника.', type: 'fill' },
+    { id: '21', prompt: 'Я вижу кошку. Кошка чёрная.', answer: 'I see a cat. The cat is black.', explanation: 'Первое упоминание даёт **a**, повторное даёт **the**.', type: 'translate' },
+    { id: '22', prompt: 'Она учитель.', answer: 'She is a teacher.', explanation: 'Профессия берёт **a**/**an**.', type: 'translate' },
+    { id: '23', prompt: 'Луна очень большая.', answer: 'The moon is very big.', explanation: 'Луна одна, поэтому **the**.', type: 'translate' },
   ],
   scoring: { excellent: 20, good: 15 },
 };
@@ -43,11 +43,11 @@ export const articlesLesson: Lesson = {
         { kind: 'Subtitle', text: 'Что такое артикль?' },
         {
           kind: 'Text',
-          text: 'Артикль — это маленькое слово перед _существительным_. В русском языке артиклей нет, а в английском они есть: и их очень много...',
+          text: 'Артикль — это такое особое слово перед _существительным_. \nВ русском языке артиклей нет, а в английском они очень частое явление.',
         },
         {
           kind: 'Text',
-          text: 'Всего существует три варианта: **a/an**, **the** и **ㅤ**. \n**ㅤ** — артикль писать не нужно',
+          text: 'Всего есть четыре варианта: **a**/**an**, **the** и ****. \n**** — артикль писать не нужно',
         },
         {
           kind: 'Examples',
@@ -55,17 +55,13 @@ export const articlesLesson: Lesson = {
             'I have **a** _dog_. — У меня есть собака.',
             'She eats **an** _apple_. — Она ест яблоко.',
             '**The** _dog_ is big. — Эта собака большая.',
-            'I like **ㅤ** _dogs_. — Я люблю собак.',
+            'I like **** _dogs_. — Я люблю собак.',
           ],
         },
-        { kind: 'Subtitle', text: 'Главный вопрос' },
+        { kind: 'Subtitle', text: 'Задайте вопрос:' },
         {
           kind: 'Text',
-          text: 'Чтобы выбрать артикль, задайте вопрос:',
-        },
-        {
-          kind: 'Text',
-          text: 'Собеседник знает, о каком предмете речь?\n| Да, знает — ставим **the**. \n| Нет, это что-то новое — ставим **a/an**. \n| Говорим вообще про всех — **ㅤ**.',
+          text: '**Собеседник знает, о каком предмете речь?** \n\nДа, знает — ставим **the**. \nНет, это что-то новое — ставим **a/an**. \nГоворим вообще или в целом — ****.',
         },
       ],
     },
@@ -75,28 +71,28 @@ export const articlesLesson: Lesson = {
         { kind: 'Subtitle', text: 'The — «тот самый»' },
         {
           kind: 'Text',
-          text: '**The** — это определённый артикль. \nОн значит: «тот самый, который мы оба знаем».',
+          text: '**The** — это определённый артикль. \n**Тот самый, который мы оба знаем**.',
         },
         { kind: 'Subtitle', text: 'Когда ставим **the**?' },
         {
           kind: 'Text',
-          text: '❶ Когда мы уже говорили об этом. \nСначала мы называем предмет с **a/an**, а потом — с **the**.',
-        },
-        {
-          kind: 'Examples',
-          items: [
-            'I saw **a** _cat_. **The** _cat_ was black. — Я увидел кошку. Кошка была чёрной.',
-          ],
-        },
-        {
-          kind: 'Text',
-          text: '❷ Ясно из ситуации. \nВы оба понимаете, о чём идёт речь.',
+          text: '❶ Ясно из ситуации. \nВы оба понимаете, о чём идёт речь.',
         },
         {
           kind: 'Examples',
           items: [
             'Please close **the** _door_. — Закрой, пожалуйста, дверь.',
             'Where is **the** car _key_? — Где ключ от машины?',
+          ],
+        },
+        {
+          kind: 'Text',
+          text: '❷ Когда мы уже говорили об этом. \nСначала мы называем предмет с **a/an**, а потом — с **the**.',
+        },
+        {
+          kind: 'Examples',
+          items: [
+            'I saw **a** _cat_. **The** _cat_ was black. — Я увидел кошку. Кошка была чёрной.',
           ],
         },
         {
@@ -196,8 +192,8 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** _Birds_ eat **ㅤ** _worms_. — Птицы едят червей.',
-            'I like **ㅤ** _dogs_. — Я люблю собак.',
+            '**** _Birds_ eat **** _worms_. — Птицы едят червей.',
+            'I like **** _dogs_. — Я люблю собак.',
           ],
         },
         {
@@ -207,15 +203,15 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** _Water_ freezes at 0°C. — Вода замерзает при 0 °C.',
-            '**ㅤ** _Music_ makes me happy. — Музыка делает меня счастливым.',
+            '**** _Water_ freezes at 0°C. — Вода замерзает при 0 °C.',
+            '**** _Music_ makes me happy. — Музыка делает меня счастливым.',
           ],
         },
         { kind: 'Subtitle', text: 'Сравните' },
         {
           kind: 'Examples',
           items: [
-            '**ㅤ** _Children_ need sleep. — Детям нужен сон. (все дети вообще)',
+            '**** _Children_ need sleep. — Детям нужен сон. (все дети вообще)',
             '**The** _children_ are asleep. — Дети спят. (конкретные дети)',
           ],
         },
@@ -232,10 +228,10 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            '**Have** **ㅤ** _breakfast_. — Завтракать',
-            'I speak **ㅤ** _English_. — Я говорю по-английски.',
-            'She plays **ㅤ** _tennis_. — Она играет в теннис.',
-            'By **ㅤ** _train_. — На поезде.',
+            '**Have** **** _breakfast_. — Завтракать',
+            'I speak **** _English_. — Я говорю по-английски.',
+            'She plays **** _tennis_. — Она играет в теннис.',
+            'By **** _train_. — На поезде.',
           ],
         },
         { kind: 'Subtitle', text: 'Места: school, work, bed' },
@@ -246,7 +242,7 @@ export const articlesLesson: Lesson = {
         {
           kind: 'Examples',
           items: [
-            'I go to **ㅤ** _school_ every day. — Я хожу в школу каждый день. (учиться)',
+            'I go to **** _school_ every day. — Я хожу в школу каждый день. (учиться)',
             'I went to **the** _school_ to meet **a** _teacher_. — Я ходил в школу, чтобы встретиться с учителем. (конкретное здание) \n\n(из контекста непонятно с каким учителем именно)',
           ],
         },
@@ -281,7 +277,7 @@ export const articlesLesson: Lesson = {
             { id: 'rThe1', text: '**The**', kind: 'result' },
             { id: 'rA', text: '**A**/**An**', kind: 'result' },
             { id: 'rThe2', text: '**The**', kind: 'result' },
-            { id: 'rNone', text: '**ㅤ**', kind: 'result' },
+            { id: 'rNone', text: '****', kind: 'result' },
           ],
           edges: [
             { from: 'root', to: 'singular', label: 'Да' },
@@ -316,14 +312,14 @@ export const articlesLesson: Lesson = {
         { kind: 'Subtitle', text: 'Что мы узнали' },
         {
           kind: 'Text',
-          text: '**A/an** — один предмет, новый или «какой-то».\n**The** — конкретный предмет, который знают все,\n**ㅤ** — когда говорим о вещах в целом.',
+          text: '**A/an** — один предмет, новый или «какой-то».\n**The** — конкретный предмет, который знают все,\n**** — когда говорим о вещах в целом.',
         },
         {
           kind: 'Examples',
           items: [
             'I have **a** _cat_. — У меня есть кошка.',
             '**The** _cat_ is very cute. — Эта кошка очень милая.',
-            '**ㅤ** _Cats_ are cute. — Кошки милые (все кошки вообще).',
+            '**** _Cats_ are cute. — Кошки милые (все кошки вообще).',
           ],
         },
         {

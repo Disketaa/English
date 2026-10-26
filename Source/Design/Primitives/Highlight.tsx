@@ -6,5 +6,13 @@ export interface HighlightProps {
 }
 
 export function Highlight({ children }: HighlightProps) {
-  return <span class={styles.Root}>{children}</span>;
+  const isEmpty = typeof children === 'string' && children.trim() === '.';
+  return (
+    <span
+      class={styles.Root}
+      style={isEmpty ? { color: 'transparent' } : undefined}
+    >
+      {children}
+    </span>
+  );
 }

@@ -45,7 +45,7 @@
 .Translation {
   font-style: italic;
   opacity: 0.85;
-  color: var(--Color-Text-Secondary);
+  color: color-mix(in srgb, var(--Color-Dark) 50%, transparent);
 }
 
 .Revealed {

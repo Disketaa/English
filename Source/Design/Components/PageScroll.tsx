@@ -14,14 +14,20 @@ const PageOffset = 60;
 export function PageScroll({ currentPage, onPageChange, children }: PageScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isProgrammatic = useRef(false);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrolledPage = useRef(currentPage === 0 ? 0 : -1);
 
   const scrollToPage = useCallback((page: number) => {
     const panel = containerRef.current?.children[page];
     if (!(panel instanceof HTMLElement)) return;
     isProgrammatic.current = true;
+    scrolledPage.current = page;
     panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    isProgrammatic.current = false;
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    scrollTimer.current = setTimeout(() => {
+      isProgrammatic.current = false;
+      scrollTimer.current = null;
+    }, 450);
   }, []);
 
   const handleScroll = useCallback(() => {
@@ -39,13 +45,17 @@ export function PageScroll({ currentPage, onPageChange, children }: PageScrollPr
     const atBottom =
       window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - PageOffset;
     if (atBottom) current = panels.length - 1;
+    if (current === scrolledPage.current) return;
     scrolledPage.current = current;
     onPageChange(current);
   }, [onPageChange]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    };
   }, [handleScroll]);
 
   useEffect(() => {

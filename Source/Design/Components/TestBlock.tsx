@@ -40,6 +40,10 @@ function levenshtein(a: string, b: string): number {
 function isCloseEnough(user: string, expected: string): boolean {
   const nu = normalize(user);
   const ne = normalize(expected);
+  // Empty input is valid for null article (—)
+  if (ne === '' || ne === '—' || ne === '-') {
+    return nu === '' || nu === '—' || nu === '-';
+  }
   if (nu === ne) return true;
   // Only allow fuzzy matching for longer answers (translations)
   if (ne.length < 5) return false;
@@ -59,18 +63,21 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
   const parts = splitBlanks(question.prompt);
   const blanks = parts.length - 1;
   const expected = splitAnswers(question.answer);
+  const vals = values.length === (blanks > 0 ? blanks : 1) ? values : Array.from({ length: blanks > 0 ? blanks : 1 }, (_, i) => values[i] ?? '');
 
   const allCorrect =
     submitted &&
-    values.length === expected.length &&
-    values.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
+    vals.length === expected.length &&
+    vals.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
 
   function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
+    const blanksCount = blanks > 0 ? blanks : 1;
+    const currentVals = values.length === blanksCount ? values : Array.from({ length: blanksCount }, (_, i) => values[i] ?? '');
     const correct =
-      values.length === expected.length &&
-      values.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
+      currentVals.length === expected.length &&
+      currentVals.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
     if (correct) setScore((s) => s + 1);
   }
 
@@ -78,7 +85,6 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
     if (currentIndex + 1 >= test.questions.length) {
       setFinished(true);
       if (onComplete) onComplete();
-      if (onFinish) onFinish();
     } else {
       setCurrentIndex((i) => i + 1);
       setValues([]);
@@ -110,14 +116,17 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
           {score} из {total} ({pct}%)
         </p>
         <p class={styles.Verdict}>{verdict}</p>
+        <div class={styles.ButtonWrap}>
+          <Button variant="Primary" onClick={() => { if (onFinish) onFinish(); }}>
+            Готово
+          </Button>
+        </div>
       </div>
       </div>
   );
 }
 
   // Ensure values array has right length
-  const vals = values.length === (blanks > 0 ? blanks : 1) ? values : Array.from({ length: blanks > 0 ? blanks : 1 }, (_, i) => values[i] ?? '');
-
   return (
     <div class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}>
       <div class={styles.Root}>
@@ -172,33 +181,35 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
         </div>
         {!submitted && (
           <>
-            <hr class={styles.Separator} />
             <div class={styles.ButtonWrap}>
-              <Button variant="Primary" onClick={handleSubmit} disabled={vals.some((v) => v.trim() === '')}>
-                Проверить
-              </Button>
+            <Button variant="Primary" onClick={handleSubmit}>
+              Проверить
+            </Button>
             </div>
           </>
         )}
         {submitted && (
           <div class={styles.Feedback}>
-            <hr class={styles.Separator} />
-            <button
+            <div
               class={styles.AnswerBox}
-              type="button"
+              role="button"
+              tabIndex={0}
               onClick={() => setRevealed((v) => !v)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') setRevealed((v) => !v);
+              }}
             >
               {!allCorrect && (
                 <span class={styles.Answer}>
-                  Правильный ответ: <strong>{question.answer}</strong>
+                  Правильный ответ: <strong>{question.answer === '\u2014' ? <span class={styles.BlankHighlight}>&nbsp;</span> : question.answer}</strong>
                 </span>
               )}
-              <span class={styles.ExplanationToggle}>
+              <span class={`${styles.ExplanationToggle} ${revealed ? styles.ExplanationRevealed : ''}`}>
                 {revealed
                   ? highlightNodes(question.explanation)
                   : 'Нажмите, для пояснения'}
               </span>
-            </button>
+            </div>
             <div class={styles.ButtonWrap}>
               <Button variant="Primary" onClick={handleNext}>
                 {currentIndex + 1 >= test.questions.length ? 'Завершить' : 'Далее'}

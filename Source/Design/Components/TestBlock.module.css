@@ -1,7 +1,7 @@
 .Container {
   background: transparent;
   border-radius: var(--Radius-Md);
-  padding: var(--Space-Md);
+  padding: 0;
   transition: background 0.4s ease;
 }
 
@@ -11,7 +11,7 @@
   gap: var(--Space-Md);
   align-items: center;
   text-align: center;
-  padding: var(--Space-Md);
+  padding: 0;
   position: relative;
 }
 
@@ -91,7 +91,7 @@
 .Separator {
   width: 100%;
   border: none;
-  border-top: 1px solid color-mix(in srgb, var(--Color-Dark) 25%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   margin: var(--Space-Sm) 0;
 }
 
@@ -142,7 +142,7 @@
 .ExplanationToggle {
   font-style: italic;
   opacity: 0.85;
-  color: var(--Color-Text-Secondary);
+  color: color-mix(in srgb, var(--Color-Dark) 50%, transparent);
   background: transparent;
   border: none;
   padding: 0;
@@ -156,9 +156,22 @@
     opacity 0.15s ease;
 }
 
+.ExplanationRevealed {
+  color: var(--Color-Sage) !important;
+  opacity: 1;
+}
+
 .ExplanationToggle:active {
   transform: scale(0.98);
   opacity: 0.8;
+}
+
+.BlankHighlight {
+  display: inline-block;
+  min-width: 0.75rem;
+  background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
+  border-radius: calc(var(--Radius-Sm) / 2);
+  padding: 0 0.125rem;
 }
 
 .ProgressText {

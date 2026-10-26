@@ -22,7 +22,8 @@ function parseHighlights(
       nodes.push(text.slice(lastIndex, match.index));
     }
     if (match[1] !== undefined) {
-      nodes.push(<Highlight key={`${lineIndex}-${match.index}`}>{match[1]}</Highlight>);
+      const content = match[1] || '.';
+      nodes.push(<Highlight key={`${lineIndex}-${match.index}`}>{content}</Highlight>);
     } else if (match[2] !== undefined) {
       nodes.push(<em key={`${lineIndex}-${match.index}`}>{match[2]}</em>);
     } else if (match[3] !== undefined) {
