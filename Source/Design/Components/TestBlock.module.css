@@ -244,13 +244,13 @@
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  color: var(--Color-Green-Deep);
+  color: var(--Color-Text-Primary);
   mix-blend-mode: multiply;
 }
 
 .Verdict {
   font-size: 1rem;
-  color: var(--Color-Text-Secondary);
+  color: var(--Color-Text-Primary);
   margin: 0;
   mix-blend-mode: multiply;
 }
