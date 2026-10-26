@@ -39,6 +39,7 @@
   bottom: calc(-1 * var(--Space-Xl));
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   z-index: -1;
+  transition: background 0.4s ease;
 }
 
 .PageTestPass::before {

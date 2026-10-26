@@ -26,6 +26,18 @@
   padding: 0;
   position: relative;
   flex: 1;
+  animation: _testFadeIn var(--Duration-Reveal) var(--Ease-Reveal) both;
+}
+
+@keyframes _testFadeIn {
+  from {
+    opacity: 0.5;
+    transform: translate3d(0, var(--Reveal-Distance), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
 }
 
 .Counter {
@@ -153,6 +165,7 @@
   transition:
     transform 0.15s ease,
     opacity 0.15s ease;
+  animation: _testFadeIn var(--Duration-Reveal) var(--Ease-Reveal) both;
 }
 
 .AnswerBox:active {

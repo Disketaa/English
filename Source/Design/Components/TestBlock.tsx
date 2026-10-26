@@ -157,7 +157,7 @@ export function TestBlock({
   // Ensure values array has right length
   return (
     <div class={styles.Container}>
-      <div class={styles.Root}>
+      <div class={styles.Root} key={currentIndex}>
         <div class={styles.Prompt}>
           {blanks > 0 ? (
             parts.map((part, i) => (
