@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { highlightNodes } from '../Primitives/Text';
 import { Button } from './Button';
 import styles from './TestBlock.module.css';
@@ -8,6 +8,7 @@ export interface TestBlockProps {
   test: Test;
   onComplete?: () => void;
   onFinish?: () => void;
+  onProgress?: (current: number, total: number) => void;
 }
 
 function splitBlanks(prompt: string): string[] {
@@ -18,8 +19,18 @@ function splitAnswers(answer: string): string[] {
   return answer.split('/').map((s) => s.trim());
 }
 
+function padValues(values: string[], blanks: number): string[] {
+  const count = blanks > 0 ? blanks : 1;
+  return values.length === count
+    ? values
+    : Array.from({ length: count }, (_, i) => values[i] ?? '');
+}
+
 function normalize(s: string): string {
-  return s.trim().toLowerCase().replace(/[\s.,!?;:]+/g, '');
+  return s
+    .trim()
+    .toLowerCase()
+    .replace(/[\s.,!?;:]+/g, '');
 }
 
 function levenshtein(a: string, b: string): number {
@@ -51,7 +62,7 @@ function isCloseEnough(user: string, expected: string): boolean {
   return levenshtein(nu, ne) <= maxDist;
 }
 
-export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
+export function TestBlock({ test, onComplete, onFinish, onProgress }: TestBlockProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [values, setValues] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
@@ -63,7 +74,11 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
   const parts = splitBlanks(question.prompt);
   const blanks = parts.length - 1;
   const expected = splitAnswers(question.answer);
-  const vals = values.length === (blanks > 0 ? blanks : 1) ? values : Array.from({ length: blanks > 0 ? blanks : 1 }, (_, i) => values[i] ?? '');
+  const vals = padValues(values, blanks);
+
+  useEffect(() => {
+    if (onProgress) onProgress(currentIndex + 1, test.questions.length);
+  }, [currentIndex, test.questions.length, onProgress]);
 
   const allCorrect =
     submitted &&
@@ -73,8 +88,7 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
   function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
-    const blanksCount = blanks > 0 ? blanks : 1;
-    const currentVals = values.length === blanksCount ? values : Array.from({ length: blanksCount }, (_, i) => values[i] ?? '');
+    const currentVals = padValues(values, blanks);
     const correct =
       currentVals.length === expected.length &&
       currentVals.every((v, i) => isCloseEnough(v, expected[i] ?? ''));
@@ -109,26 +123,35 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
     if (score >= test.scoring.excellent) verdict = 'Отлично!';
     else if (score >= test.scoring.good) verdict = 'Хорошо, повторите «Исключения».';
     return (
-    <div class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}>
+      <div
+        class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}
+      >
         <div class={styles.Result}>
-        <h2 class={styles.ResultTitle}>Результат</h2>
-        <p class={styles.Score}>
-          {score} из {total} ({pct}%)
-        </p>
-        <p class={styles.Verdict}>{verdict}</p>
-        <div class={styles.ButtonWrap}>
-          <Button variant="Primary" onClick={() => { if (onFinish) onFinish(); }}>
-            Готово
-          </Button>
+          <h2 class={styles.ResultTitle}>Результат</h2>
+          <p class={styles.Score}>
+            {score} из {total} ({pct}%)
+          </p>
+          <p class={styles.Verdict}>{verdict}</p>
+          <div class={styles.ButtonWrap}>
+            <Button
+              variant="Primary"
+              onClick={() => {
+                if (onFinish) onFinish();
+              }}
+            >
+              Готово
+            </Button>
+          </div>
         </div>
       </div>
-      </div>
-  );
-}
+    );
+  }
 
   // Ensure values array has right length
   return (
-    <div class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}>
+    <div
+      class={`${styles.Container} ${submitted ? (allCorrect ? styles.ContainerCorrect : styles.ContainerWrong) : ''}`}
+    >
       <div class={styles.Root}>
         <div class={styles.Prompt}>
           {blanks > 0 ? (
@@ -155,36 +178,36 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
                 )}
               </span>
             ))
-        ) : (
-          <>
-            <span>{highlightNodes(question.prompt)}</span>
-            <input
-              class={`${styles.Blank} ${submitted ? (isCloseEnough(vals[0] ?? '', expected[0] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
-              type="text"
-              value={vals[0] ?? ''}
-              maxLength={Math.max(10, (expected[0] ?? '').length + 5)}
-              onInput={(e) => {
-                const target = e.currentTarget;
-                if (target instanceof HTMLInputElement) {
-                  setValue(0, target.value);
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleSubmit();
-              }}
-              disabled={submitted}
-              placeholder="Переведите на английский"
-              style={{ width: '100%' }}
-            />
-          </>
-        )}
+          ) : (
+            <>
+              <span>{highlightNodes(question.prompt)}</span>
+              <input
+                class={`${styles.Blank} ${submitted ? (isCloseEnough(vals[0] ?? '', expected[0] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
+                type="text"
+                value={vals[0] ?? ''}
+                maxLength={Math.max(10, (expected[0] ?? '').length + 5)}
+                onInput={(e) => {
+                  const target = e.currentTarget;
+                  if (target instanceof HTMLInputElement) {
+                    setValue(0, target.value);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSubmit();
+                }}
+                disabled={submitted}
+                placeholder="Переведите на английский"
+                style={{ width: '100%' }}
+              />
+            </>
+          )}
         </div>
         {!submitted && (
           <>
             <div class={styles.ButtonWrap}>
-            <Button variant="Primary" onClick={handleSubmit}>
-              Проверить
-            </Button>
+              <Button variant="Primary" onClick={handleSubmit}>
+                Проверить
+              </Button>
             </div>
           </>
         )}
@@ -201,13 +224,20 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
             >
               {!allCorrect && (
                 <span class={styles.Answer}>
-                  Правильный ответ: <strong>{question.answer === '\u2014' ? <span class={styles.BlankHighlight}>&nbsp;</span> : question.answer}</strong>
+                  Правильный ответ:{' '}
+                  <strong>
+                    {question.answer === '\u2014' ? (
+                      <span class={styles.BlankHighlight}>&nbsp;</span>
+                    ) : (
+                      question.answer
+                    )}
+                  </strong>
                 </span>
               )}
-              <span class={`${styles.ExplanationToggle} ${revealed ? styles.ExplanationRevealed : ''}`}>
-                {revealed
-                  ? highlightNodes(question.explanation)
-                  : 'Нажмите, для пояснения'}
+              <span
+                class={`${styles.ExplanationToggle} ${revealed ? styles.ExplanationRevealed : ''}`}
+              >
+                {revealed ? highlightNodes(question.explanation) : 'Нажмите, для пояснения'}
               </span>
             </div>
             <div class={styles.ButtonWrap}>
@@ -218,7 +248,6 @@ export function TestBlock({ test, onComplete, onFinish }: TestBlockProps) {
           </div>
         )}
       </div>
-      <p class={styles.ProgressText}>{currentIndex + 1} / {test.questions.length}</p>
     </div>
   );
 }

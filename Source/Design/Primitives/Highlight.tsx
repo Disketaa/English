@@ -8,10 +8,7 @@ export interface HighlightProps {
 export function Highlight({ children }: HighlightProps) {
   const isEmpty = typeof children === 'string' && children.trim() === '.';
   return (
-    <span
-      class={styles.Root}
-      style={isEmpty ? { color: 'transparent' } : undefined}
-    >
+    <span class={styles.Root} style={isEmpty ? { color: 'transparent' } : undefined}>
       {children}
     </span>
   );

@@ -32,11 +32,11 @@
 .PageTest::before {
   content: '';
   position: absolute;
-  top: calc(-1 * var(--Space-Md));
+  top: calc(-1 * var(--Space-Xl));
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  bottom: calc(-1 * var(--Space-Md));
+  bottom: calc(-1 * var(--Space-Xl));
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   z-index: -1;
 }

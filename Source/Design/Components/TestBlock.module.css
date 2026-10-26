@@ -3,6 +3,9 @@
   border-radius: var(--Radius-Md);
   padding: 0;
   transition: background 0.4s ease;
+  min-height: calc(var(--Space-Xl) * 8);
+  display: flex;
+  flex-direction: column;
 }
 
 .Root {
@@ -13,6 +16,7 @@
   text-align: center;
   padding: 0;
   position: relative;
+  flex: 1;
 }
 
 .Counter {
@@ -95,6 +99,13 @@
   margin: var(--Space-Sm) 0;
 }
 
+.ButtonWrap {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .ButtonWrap button {
   flex: 1;
   background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
@@ -107,6 +118,7 @@
   gap: var(--Space-Sm);
   align-items: center;
   width: 100%;
+  flex: 1;
 }
 
 .AnswerBox {
@@ -114,6 +126,7 @@
   flex-direction: column;
   gap: 0;
   width: 100%;
+  box-sizing: border-box;
   border: none;
   background: color-mix(in srgb, var(--Color-Sage) 25%, transparent);
   padding: var(--Space-Sm) var(--Space-Md);

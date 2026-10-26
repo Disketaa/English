@@ -45,6 +45,12 @@ export function LessonScreen({
   const [currentPage, setCurrentPage] = useState(page);
   const [visiblePage, setVisiblePage] = useState(page);
   const [testCompleted, setTestCompleted] = useState(false);
+  const [testProgress, setTestProgress] = useState<{ current: number; total: number } | null>(
+    null
+  );
+  const handleTestProgress = useCallback((c: number, t: number) => {
+    setTestProgress({ current: c, total: t });
+  }, []);
   const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pendingScroll = useRef<number | null>(null);
 
@@ -103,7 +109,16 @@ export function LessonScreen({
                 }}
               >
                 <Reveal index={0}>
-                  <NavTitle title={pageContent.nav} seed={lesson.id + pageIndex} index={pageIndex + 1} />
+                  <NavTitle
+                    title={pageContent.nav}
+                    seed={lesson.id + pageIndex}
+                    index={pageIndex + 1}
+                    progress={
+                      pageContent.blocks.some((b) => b.kind === 'Test')
+                        ? (testProgress ?? undefined)
+                        : undefined
+                    }
+                  />
                 </Reveal>
                 <Stack gap="Lg" padded={false}>
                   {pageContent.blocks.map((block, blockIndex) => {
@@ -130,7 +145,12 @@ export function LessonScreen({
                     if (block.kind === 'Test') {
                       return (
                         <Reveal key={blockIndex} index={starts[blockIndex]}>
-                          <TestBlock test={block.test} onComplete={() => setTestCompleted(true)} onFinish={onBack} />
+                          <TestBlock
+                            test={block.test}
+                            onComplete={() => setTestCompleted(true)}
+                            onFinish={onBack}
+                            onProgress={handleTestProgress}
+                          />
                         </Reveal>
                       );
                     }
