@@ -17,8 +17,9 @@ export function App() {
   const page = Math.min(route.name === 'Lesson' ? route.page : 0, lastPage);
 
   const openLesson = (lessonId: string) => {
+    const storedPage = progress[lessonId]?.page ?? 0;
     window.scrollTo(0, 0);
-    navigate(lessonUrl(lessonId, 0));
+    navigate(lessonUrl(lessonId, storedPage));
   };
 
   if (lesson === undefined) {
@@ -31,7 +32,10 @@ export function App() {
       page={page}
       favourite={stored.favourite}
       onBack={() => navigate(homeUrl())}
-      onPageChange={(next) => navigate(lessonUrl(lesson.id, next))}
+      onPageChange={(next) => {
+        navigate(lessonUrl(lesson.id, next));
+        patchLesson(lesson.id, { page: next });
+      }}
       onToggleFavourite={() => patchLesson(lesson.id, { favourite: !stored.favourite })}
     />
   );
