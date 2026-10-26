@@ -245,10 +245,12 @@
   font-weight: 700;
   margin: 0;
   color: var(--Color-Green-Deep);
+  mix-blend-mode: multiply;
 }
 
 .Verdict {
   font-size: 1rem;
   color: var(--Color-Text-Secondary);
   margin: 0;
+  mix-blend-mode: multiply;
 }
