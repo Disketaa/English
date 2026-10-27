@@ -14,7 +14,9 @@
   width: 100%;
   box-sizing: border-box;
   gap: var(--Space-Md);
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
+  overflow-clip-margin: 64px;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -162,7 +164,7 @@
 .BigNumber {
   position: absolute;
   top: 50%;
-  right: -20px;
+  right: 0;
   left: auto;
   transform: translateY(-50%) rotateX(60deg) rotateZ(45deg);
   font-size: 16rem;

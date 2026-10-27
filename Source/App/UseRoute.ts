@@ -21,8 +21,14 @@ export function homeUrl(): string {
   return '#/';
 }
 
+const routeListeners = new Set<() => void>();
+
+/** Update the URL without fragment navigation: assigning `location.hash` cancels Chromium's
+ * middle-click autoscroll whenever scrolling changes the page. */
 export function navigate(hash: string): void {
-  window.location.hash = hash;
+  if (window.location.hash === hash) return;
+  window.history.pushState(null, '', hash);
+  for (const listener of routeListeners) listener();
 }
 
 export function useRoute(): Route {
@@ -30,8 +36,12 @@ export function useRoute(): Route {
 
   useEffect(() => {
     const handleChange = () => setRoute(parseRoute(window.location.hash));
+    routeListeners.add(handleChange);
     window.addEventListener('hashchange', handleChange);
-    return () => window.removeEventListener('hashchange', handleChange);
+    return () => {
+      routeListeners.delete(handleChange);
+      window.removeEventListener('hashchange', handleChange);
+    };
   }, []);
 
   return route;

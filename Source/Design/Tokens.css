@@ -82,6 +82,7 @@ html {
   -webkit-text-size-adjust: 100%;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: clip;
 }
 
 html::-webkit-scrollbar {
@@ -103,7 +104,6 @@ body {
   max-width: var(--App-Max-Width);
   margin: 0 auto;
   min-height: 100dvh;
-  overflow-x: clip;
 }
 
 /* Touch targets */
