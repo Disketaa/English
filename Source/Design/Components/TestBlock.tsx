@@ -33,7 +33,10 @@ function shuffle<T>(array: T[]): T[] {
 }
 
 function isNullAnswer(answer: string): boolean {
-  return answer === '\u2014' || answer === '.' || answer === '-';
+  const trimmed = answer.trim();
+  return (
+    trimmed === '' || trimmed === '.' || trimmed === '—' || trimmed === '–' || trimmed === '-'
+  );
 }
 
 function padValues(values: string[], blanks: number): string[] {
@@ -47,7 +50,7 @@ function normalize(s: string): string {
   return s
     .trim()
     .toLowerCase()
-    .replace(/[\s.,!?;:]+/g, '');
+    .replace(/[\s.,!?;:—–-]+/g, '');
 }
 
 function levenshtein(a: string, b: string): number {
@@ -68,15 +71,19 @@ function levenshtein(a: string, b: string): number {
 function isCloseEnough(user: string, expected: string): boolean {
   const nu = normalize(user);
   const ne = normalize(expected);
-  // Empty input is valid for null article (—)
-  if (ne === '' || ne === '—' || ne === '-') {
-    return nu === '' || nu === '—' || nu === '-';
+  // Empty input is valid for null article (— / . / -)
+  const isNullish = (s: string) => s === '' || s === '.' || s === '—' || s === '–' || s === '-';
+  if (isNullish(ne)) {
+    return isNullish(nu);
   }
   if (nu === ne) return true;
   // Only allow fuzzy matching for longer answers (translations)
-  if (ne.length < 5) return false;
+  if (ne.length < 5) {
+    return false;
+  }
   const maxDist = Math.max(1, Math.floor(ne.length * 0.1));
-  return levenshtein(nu, ne) <= maxDist;
+  const r = levenshtein(nu, ne) <= maxDist;
+  return r;
 }
 
 export function TestBlock({
@@ -121,7 +128,6 @@ export function TestBlock({
     setSubmitted(true);
     const currentVals = padValues(values, blanks);
     if (isChoice && blanks > 0 && currentVals.slice(0, blanks).some((v) => v === '')) {
-      if (onAnswered) onAnswered(false);
       return;
     }
     const correct =
@@ -163,15 +169,14 @@ export function TestBlock({
     setValues((prev) => {
       const next = [...prev];
       while (next.length < blanks) next.push('');
-      // Toggle: if this option already fills a blank, clear it
       const filledIdx = next.indexOf(opt);
       if (filledIdx !== -1) {
         next[filledIdx] = '';
         return next;
       }
-      // Otherwise fill the first empty blank in order
       const emptyIdx = next.indexOf('');
       if (emptyIdx !== -1) next[emptyIdx] = opt;
+      else if (blanks > 0) next[0] = opt;
       return next;
     });
   }
@@ -241,7 +246,8 @@ export function TestBlock({
                   <>
                     {isChoice ? (
                       <span
-                        class={`${styles.Blank} ${submitted ? (isCloseEnough(vals[i], expected[i] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
+                        key={`${i}-${vals[i]}`}
+                        class={`${styles.Blank} ${vals[i] === '' ? styles.BlankEmpty : ''} ${submitted ? (isCloseEnough(vals[i], expected[i] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
                         style={{
                           minWidth: '2rem',
                           minHeight: '1.6rem',
@@ -249,9 +255,10 @@ export function TestBlock({
                           alignItems: 'center',
                           justifyContent: 'center',
                           textAlign: 'center',
+                          pointerEvents: 'none',
                         }}
                       >
-                        {isNullAnswer(vals[i]) ? '\u00a0' : vals[i] || '___'}
+                        {vals[i] === '' ? '?' : isNullAnswer(vals[i]) ? '\u00a0' : vals[i]}
                       </span>
                     ) : (
                       <input
@@ -276,7 +283,7 @@ export function TestBlock({
               </span>
             ))
           ) : (
-            <>
+            <div class={styles.TranslateWrap}>
               <span>{highlightNodes(question.prompt)}</span>
               <input
                 class={`${styles.Blank} ${submitted ? (isCloseEnough(vals[0] ?? '', expected[0] ?? '') ? styles.BlankCorrect : styles.BlankWrong) : ''}`}
@@ -294,9 +301,8 @@ export function TestBlock({
                 }}
                 disabled={submitted}
                 placeholder="Переведите на английский"
-                style={{ width: '100%' }}
               />
-            </>
+            </div>
           )}
         </div>
         {!submitted && (
@@ -320,7 +326,13 @@ export function TestBlock({
                 </div>
               )}
               <div class={styles.ButtonWrap}>
-                <Button variant="Primary" onClick={handleSubmit}>
+                <Button
+                  variant="Primary"
+                  onClick={handleSubmit}
+                  disabled={
+                    isChoice && blanks > 0 && vals.slice(0, blanks).some((v) => v === '')
+                  }
+                >
                   Проверить
                 </Button>
               </div>
