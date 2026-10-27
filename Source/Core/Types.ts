@@ -1,7 +1,7 @@
 /** One test question. */
 export interface TestQuestion {
-  /** Unique id. */
-  id: string;
+  /** Unique id (optional — questions can be shuffled without stable ids). */
+  id?: string;
   /** The question text (may contain ___ for blanks). */
   prompt: string;
   /** Correct answer (multiple parts separated by " / "). */
