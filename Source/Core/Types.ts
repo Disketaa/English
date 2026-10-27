@@ -9,7 +9,9 @@ export interface TestQuestion {
   /** Explanation shown after answering. */
   explanation: string;
   /** Question type. */
-  type: 'fill' | 'translate';
+  type: 'fill' | 'translate' | 'choice';
+  /** Pre-made answers to choose from (choice type). Applied to each blank. */
+  options?: string[];
 }
 
 /** A test attached to a lesson. */

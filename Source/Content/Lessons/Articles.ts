@@ -1,4 +1,4 @@
-import { Lesson, Test } from '../../Core/Types';
+﻿import { Lesson, Test } from '../../Core/Types';
 
 export const articlesTest: Test = {
   title: 'Тест по теме «Артикли»',
@@ -43,7 +43,7 @@ export const articlesTest: Test = {
       id: '6',
       prompt: 'I like ___ dogs. **(в целом)**',
       answer: '—',
-      explanation: 'Говорим о собаках вообще, во множественном числе. Нужен нулевой артикль.',
+      explanation: 'Говорим о собаках **вообще**, во множественном числе. Нужен **нулевой артикль**.',
       type: 'fill',
     },
     {
@@ -438,7 +438,7 @@ export const articlesLesson: Lesson = {
           items: [
             '**a/an** — какой-то, один из многих',
             '**the** — тот самый, известный',
-            'без артикля — все вообще, в целом',
+            '**без артикля** — все вообще, в целом',
           ],
         },
         { kind: 'Subtitle', text: 'Совет' },
