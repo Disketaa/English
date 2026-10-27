@@ -65,9 +65,21 @@
   color: var(--Color-Dark);
 }
 
+@keyframes _blankPop {
+  0% {
+    transform: translateY(6px);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .Blank {
   display: inline-block;
   min-width: 2rem;
+  min-height: 1.6rem;
   padding: 0 0.125rem;
   border: none;
   border-radius: calc(var(--Radius-Sm) / 2);
@@ -82,13 +94,33 @@
   field-sizing: content;
   line-height: 0.8;
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: _blankPop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.Blank:hover {
+  background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
 }
 
 .Blank:focus {
-  background: var(--Color-Cream-Deep);
+  background: color-mix(in srgb, var(--Color-Sage) 50%, transparent);
   outline: none;
   box-shadow: none;
   border-radius: calc(var(--Radius-Sm) / 2);
+}
+
+.Blank:active {
+  background: var(--Color-Sage);
+}
+
+.TranslateWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: var(--Space-Xs);
 }
 
 .Blank::placeholder {
@@ -111,9 +143,8 @@
   background: color-mix(in srgb, #c0392b 25%, transparent);
 }
 
-.Blank:disabled {
-  opacity: 0.8;
-  border-radius: calc(var(--Radius-Sm) / 2);
+.BlankEmpty {
+  color: color-mix(in srgb, var(--Color-Text-Primary) 40%, transparent);
 }
 
 .ChoiceRow {
@@ -144,6 +175,8 @@
 }
 
 .ChoiceBtn {
+  flex: 1 1 0;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -160,9 +193,11 @@
   line-height: 0.8;
   text-align: center;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    opacity 0.15s ease;
   mix-blend-mode: multiply;
-  min-width: 2rem;
   box-sizing: border-box;
   outline: none;
 }
@@ -174,6 +209,11 @@
 
 .ChoiceBtn:not(:disabled):hover {
   background: color-mix(in srgb, var(--Color-Sage) 75%, transparent);
+}
+
+.ChoiceBtn:active {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 
 .ChoiceSelected {
