@@ -18,6 +18,9 @@
     "comments:format": "node Tools/Comments/FormatComments.mjs",
     "comments:format:check": "node Tools/Comments/FormatComments.mjs --check",
     "dedup": "node Tools/Dedup/DedupCheck.mjs",
+    "perf": "node Tools/Performance/PerfRun.mjs",
+    "perf:strict": "node Tools/Performance/PerfRun.mjs --strict",
+    "perf:profile": "node Tools/Performance/PerfRun.mjs --profile --coverage",
     "check": "npm run format:check && npm run lint && npm run comments:format:check && npm run format:css:check && npm run dedup && npm run build"
   },
   "dependencies": {

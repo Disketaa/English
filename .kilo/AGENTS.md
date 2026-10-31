@@ -132,6 +132,10 @@ npm run comments
 # Rewrite comments to canonical shape
 npm run comments:format
 
+# Browser performance report
+npm run perf
+npm run perf:strict
+
 # CLI shortcut (from Tools/Cli/)
 .\Tools\Cli\Uq.cmd lint
 .\Tools\Cli\Uq.cmd fix
